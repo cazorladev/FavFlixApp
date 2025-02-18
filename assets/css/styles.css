@@ -13,9 +13,9 @@
 }
 
 body {
+  font-family: 'Poppins', sans-serif;
   background-color: var(--netflix-black);
   color: white;
-  font-family: Arial, sans-serif;
   text-align: center;
 }
 
@@ -102,9 +102,6 @@ body {
   box-shadow: 0px 0px 25px rgba(229, 9, 20, 1);
 }
 
-
-
-
 /* Trending Section */
 .trending {
   text-align: center;
@@ -189,7 +186,6 @@ body {
     background-size: contain;
 }
 
-
 /* Estilos para feature */
 .feature-card {
   transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
@@ -222,6 +218,7 @@ body {
   max-width: 900px;
   margin: auto;
 }
+
 /* ----- Ajustar tamaño del modal ----- */
 .modal-content {
   border-radius: 12px;
