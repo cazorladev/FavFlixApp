@@ -1,10 +1,11 @@
-/* styles.css */
+/* Variables de color */
 :root {
   --netflix-red: #E50914;
   --netflix-red-hover: #F40612;
   --netflix-black: #141414;
 }
 
+/* Reset y configuración global */
 * {
   margin: 0;
   padding: 0;
@@ -18,21 +19,50 @@ body {
   text-align: center;
 }
 
+.navbar {
+  position: absolute;
+  width: 100%;
+  top: 0;
+  background: rgba(0, 0, 0, 0.7);
+  padding: 15px 0;
+  transition: background 0.3s ease-in-out;
+  z-index: 1000;
+}
+
+.navbar-brand img {
+  height: 60px; /* Logo más grande */
+  transition: transform 0.3s;
+}
+
+.navbar-brand img:hover {
+  transform: scale(1.1);
+}
+
+.btn-danger {
+  background-color: var(--netflix-red);
+  border-radius: 5px;
+  transition: background 0.3s ease, transform 0.2s;
+}
+
+.btn-danger:hover {
+  background-color: var(--netflix-red-hover);
+  transform: scale(1.05);
+}
+
+
+/* Hero Section */
 .hero {
-  position:relative;
   background-image: url('/assets/img/favflix-background.jpg');
-  /* background: linear-gradient(to bottom, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.9)), url('/assets/img/favflix-background.jpg') center/cover no-repeat; */
   background-size: cover;
   background-position: center;
-  /* height: 90vh; */
-  height: 80vh;
+  height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
-  text-align: center;
+  position: relative;
 }
 
-.hero::before{
+.hero::before {
   content: "";
   position: absolute;
   top: 0;
@@ -41,79 +71,296 @@ body {
   height: 100%;
   background: linear-gradient(
     to bottom,
-    rgba(0, 0, 0, 0.8) 10%,  /* Más oscuro en la parte superior */
-    rgba(0, 0, 0, 0.4) 50%,  /* Menos oscuro en el centro */
-    rgba(0, 0, 0, 0.8) 90%   /* Más oscuro en la parte inferior */
-  );
+    rgba(0, 0, 0, 0.9) 10%, /* Más oscuro en la parte superior */
+    rgba(0, 0, 0, 0.5) 50%, /* Centro más claro */
+    rgba(0, 0, 0, 0.9) 90%); /* Más oscuro en la parte inferior */
   z-index: 0;
-  pointer-events: none; /* Permite interactuar con los elementos debajo */
 }
 
 .hero .container {
-  position: relative; /* Para que el contenido esté sobre la capa oscura */
+  position: relative;
   z-index: 1;
 }
 
-.navbar-brand img {
-  height: 50px;
+.hero h1 {
+  font-size: 3rem;
+  font-weight: bold;
+  text-shadow: 2px 2px 15px rgba(0, 0, 0, 0.8);
 }
 
-.navbar {
-  position: absolute;
-  width: 100%;
-  top: 0;
-  z-index: 1000;
+/* Estilos solo para el botón "Registrar Ahora" */
+.hero .btn-danger {
+  padding: 15px 35px; /* Botón más grande */
+  font-size: 1.5rem; /* Texto más grande */
+  font-weight: bold;
+  box-shadow: 0px 0px 15px rgba(229, 9, 20, 0.7);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.btn-danger {
-  background-color: #e50914;
-  border: none;
+.hero .btn-danger:hover {
+  transform: scale(1.1);
+  box-shadow: 0px 0px 25px rgba(229, 9, 20, 1);
 }
-.trending .carousel-inner {
+
+
+
+
+/* Trending Section */
+.trending {
+  text-align: center;
+  padding-left: 0;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0));
+}
+
+.trend-group {
   display: flex;
+  gap: 35px;
   justify-content: center;
   align-items: center;
-  overflow: hidden;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  padding: 20px 0;
+  max-width: 90%;
+  margin: 0 auto;
+}
+
+.trend-group::-webkit-scrollbar {
+  display: none;
 }
 
 .trend-item {
+  flex: 0 0 auto;
   position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 10px;
+  min-width: 190px;
+  height: 290px;
+  border-radius: 10px;
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
 }
 
-.trend-item img {
-  max-height: 300px;
+.trend-item img.trend-img {
+  width: 100%;
+  height: 100%;
   object-fit: cover;
   border-radius: 10px;
-  transition: transform 0.3s ease-in-out;
 }
 
-.trend-item img:hover {
-  transform: scale(1.05);
+.trend-item:hover {
+  transform: scale(1.1);
+  cursor: pointer;
+  z-index: 10;
+  box-shadow: 0px 3px 3px rgba(255, 255, 255, 0.2);
 }
 
 .trend-number {
   position: absolute;
-  bottom: 10px;
-  left: 10px;
-  font-size: 3rem;
+  left: -20px;
+  bottom: -15px;
+  font-size: clamp(3rem, 5vw, 5.5rem);
   font-weight: bold;
+  color: black;
+  -webkit-text-stroke: 1px white;
+  text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.7);
+}
+
+/* Personalizar los botones del carrusel */
+.carousel-control-prev, .carousel-control-next {
+  width: 60px;
+  height: 60px;
+  background: rgba(0, 0, 0, 0.7); /* Fondo oscuro translúcido */
+  border-radius: 50%; /* Hace que sean botones circulares */
+  transition: background 0.3s ease, transform 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Efecto hover */
+.carousel-control-prev:hover, .carousel-control-next:hover {
+  background: var(--netflix-red); /* Rojo de Netflix */
+  transform: scale(1.1);
+}
+
+/* Personalizar las flechas */
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+    width: 30px;
+    height: 30px;
+    /* filter: invert(1); */
+    background-size: contain;
+}
+
+
+/* Estilos para feature */
+.feature-card {
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.feature-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0px 10px 30px rgba(255, 255, 255, 0.2);
+}
+
+.feature-icon {
+  font-size: 2.5rem;
+  transition: transform 0.3s ease-in-out;
+}
+
+.trending h2,
+.features h2 {
+  font-size: 2.2rem;
+  font-weight: bold;
+  text-align: center;
+  color: white !important; /* Ahora es blanco */
+}
+
+/* Estilos para el modal */
+.modal-dialog {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh; /* Asegura que esté centrado verticalmente */
+  max-width: 900px;
+  margin: auto;
+}
+/* ----- Ajustar tamaño del modal ----- */
+.modal-content {
+  border-radius: 12px;
+  overflow: hidden;
+  background-color: #181818;
   color: white;
-  text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.8);
+  box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.6);
 }
 
-.faq .accordion-button {
-  background-color: #303030;
+/* Imagen del modal */
+.modal-banner {
+  width: 100%;
+  height: 300px; /* Ajusta la altura de la imagen */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.modal-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Información de la película */
+.modal-info {
+  padding: 20px;
+  text-align: center;
+}
+
+.movie-title {
+  font-size: 1.8rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.movie-meta {
+  font-size: 1rem;
+  opacity: 0.8;
+  margin-bottom: 15px;
+}
+
+.movie-overview {
+  font-size: 1rem;
+  line-height: 1.5;
+  opacity: 0.9;
+  margin-bottom: 20px;
+}
+
+/* Botón dentro del modal */
+.btn-netflix {
+  background-color: #e50914;
   color: white;
+  padding: 12px 20px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  border-radius: 5px;
+  border: none;
+  transition: background 0.3s ease;
 }
 
-.faq .accordion-button:focus {
-  box-shadow: none;
+.btn-netflix:hover {
+  background-color: #b20710;
 }
 
+/* Botón de cierre */
+.close-btn {
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  font-size: 30px;
+  color: white;
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: opacity 0.3s ease, transform 0.2s ease;
+}
+
+.close-btn:hover {
+  opacity: 0.7;
+  transform: scale(1.1);
+}
+
+/* ----- Estilos del Footer ----- */
 footer {
-  background-color: #141414;
+    background: var(--netflix-black);
+    color: #b3b3b3;
+    font-size: 0.9rem;
+    /* position: relative; */
+    padding-top: 20px;
+    box-shadow: 0px -5px 10px rgba(255, 255, 255, 0.2);
+    /* border-top: 3px solid var(--netflix-red); */
+}
+
+footer h5 {
+  color: white;
+  font-size: 1.2rem;
+  margin-bottom: 15px;
+}
+
+/* Estilos de los enlaces */
+footer a {
+  color: #b3b3b3;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+footer a:hover {
+  color: white;
+}
+
+/* Redes sociales */
+.social-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  margin: 0 8px;
+  border-radius: 50%;
+  background: #222;
+  color: white;
+  font-size: 20px;
+  transition: background 0.3s ease, transform 0.2s ease;
+  /* transition: transform 0.3s ease, box-shadow 0.3s ease; */
+}
+
+.social-icon:hover {
+  background: #e50914; /* Rojo de Netflix */
+  transform: scale(1.1);
+  box-shadow: 0px 0px 15px rgba(229, 9, 20, 0.5);
+}
+
+/* Responsivo */
+@media (max-width: 768px) {
+  .social-icon {
+      width: 35px;
+      height: 35px;
+      font-size: 18px;
+  }
 }
