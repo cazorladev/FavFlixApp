@@ -4,12 +4,25 @@ body {
 }
 
 .css-login {
-    width: 500px;
+    width: 450px;
     /* border: 2px solid green; */
-    border-radius: 20px;
+    border-radius: 10 px;
 }
-
 
 .css-login-separator {
     height: 2px;
+}
+
+input[type="email"]::placeholder {
+    color: #ffffff;
+    font-style: italic;
+}
+
+input[type="password"]::placeholder {
+    color: #ffffff;
+    font-style: italic;
+}
+
+.form-control {
+    background-color: transparent;
 }
