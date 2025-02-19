@@ -23,6 +23,15 @@ form h3 {
     font-weight: 700;
     margin-bottom: 20px;
 }
+small {
+    display: block;
+    margin-top: 5px;
+    font-size: 0.9em;
+}
+.text-danger {
+    color: #ff4d4d;
+}
+
 .icons {
     display: flex;
     justify-content: center;
