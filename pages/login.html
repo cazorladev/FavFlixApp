@@ -8,36 +8,39 @@
     <link rel="stylesheet" href="../assets/css/css-login.css">
 </head>
 <body>
-    <header>
+    <header class="mb-4">
         <nav class="pt-3 ps-5"><h2 class="text-danger fs-1 fw-bold">FAVFLIX</h2></nav>
     </header>
 
     <section class="d-flex justify-content-center">
-        <div class="css-login p-5 bg-black bg-opacity-75">
-            <h2 class="text-white text-center pb-4 fs-1 fw-bold">Iniciar Sesión</h2>
+        <div class="css-login pt-5 pb-4 px-4">
+            <h2 class="text-white text-center pb-4 fs-2 fw-bold">INICIAR SESIÓN</h2>
             <form id="loginUser">
-                <div>
+                <div class="form-floating text-secondary">
                     <!-- <label for="email" class="form-label text-white">Correo electrónico</label> -->
-                    <input type="email" class="form-control py-3" id="email" aria-describedby="emailHelp" placeholder="Correo electrónico">
-                    <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+                    <input type="email" class="form-control mb-3" id="email" placeholder="Correo electrónico">
+                    <label for="floatingInput">Correo electronico</label>
                 </div>
-                <div>
+                <div class="form-floating text-secondary">
                     <!-- <label for="password" class="form-label text-white">Contraseña</label> -->
-                    <input type="password" class="form-control py-3" id="password" placeholder="Contraseña">
+                    <input type="password" class="form-control" id="password" placeholder="Contraseña">
+                    <label for="floatingInput">Contraseña</label>
                 </div>
-                
-                <div class="contenedor d-flex justify-content-center pt-3">
-                    <button type="submit" class="btn btn-danger px-5">Iniciar sesión</button>
-                </div>
-
-                <h6 class="mt-3 text-center"><a class="text-white" href="#">¿Olvidaste tu contraseña?</a></h6>
 
                 <div class="my-4 form-check">
                     <input type="checkbox" class="form-check-input" id="rememberMe" name="rememberMe">
                     <label class="form-check-label text-white" for="rememberMe">Recordar contraseña</label>
                 </div>
-                <div class="css-login-separator bg-secondary bg-opacity-50"></div>
-                <div class="py-3 d-flex justify-content-center"><h6 class="text-secondary">¿No tienes cuentas? <a class="text-white" href="/pages/register.html">Registrate ahora</a></h6></div>
+                
+                <div class="contenedor d-flex justify-content-center">
+                    <button type="submit" class="btn btn-danger">Iniciar Sesión</button>
+                </div>
+
+                <h6 class="my-3 text-center"><a class="text-white" href="#">¿Olvidaste tu contraseña?</a></h6>
+
+                
+                <div class="css-login-separator bg-white bg-opacity-50"></div>
+                <div class="py-3 d-flex justify-content-center"><h6 class="text-white">¿No tienes cuentas? <a class="text-white ms-2" href="/pages/register.html">Registrate ahora</a></h6></div>
                 
             </form>
         </div>        

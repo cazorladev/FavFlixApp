@@ -1,28 +1,29 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
 body {    
-    background-image: url(../img/BackGround-red.jpg);
+    background-image: url(../img/image1.jpg);
     background-size: cover;
 }
 
 .css-login {
     width: 450px;
-    /* border: 2px solid green; */
-    border-radius: 10 px;
+    border-radius: 10px;
+    color: white;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(20px);
+    border: 0.3px solid rgba(255, 255, 255, 0.5);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
 }
 
 .css-login-separator {
     height: 2px;
 }
 
-input[type="email"]::placeholder {
-    color: #ffffff;
-    font-style: italic;
+.btn {
+    padding: 5px 150px 5px 150px;
+    white-space: nowrap; /*Ajusta el texto para que permanezca en una sola linea*/
 }
 
-input[type="password"]::placeholder {
-    color: #ffffff;
-    font-style: italic;
-}
-
-.form-control {
-    background-color: transparent;
-}
