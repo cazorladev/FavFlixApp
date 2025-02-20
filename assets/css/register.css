@@ -44,7 +44,8 @@ small {
     text-align: left;
 }
 a {
-    text-decoration: none;
+    text-decoration: underline;
+    color: #FFD700;
 }
 .btn {
     margin-top: 20px;
