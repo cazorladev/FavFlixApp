@@ -1,51 +1,115 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FavFlix</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>FavFlix: Tu plataforma de películas favorita</title>
+
+    <meta name="description" content="FavFlix te permite guardar, organizar y compartir tus películas favoritas en un solo lugar.">
+    <meta name="author" content="FavFlix - Grupo 1">
+    <meta name="robots" content="index, follow">
+
+    <!-- Favicon -->
+    <link rel="icon" href="/assets/img/favicon.ico" type="image/x-icon">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <!-- Custom CSS -->
     <link rel="stylesheet" href="/assets/css/dashboard.css">
 </head>
 <body>
-    <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <div class="container">
-            <a class="navbar-brand" href="dashboard.html"><img src="/assets/img/Logo-FavFlix.png" alt="FavFlix" height="40"></a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav me-auto">
-                    <li class="nav-item"><a class="nav-link" href="dashboard.html">Inicio</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#mi-lista" id="nav-mi-lista">Mi Lista</a></li>
-                </ul>
-                <form class="d-flex" id="search-form">
-                    <input class="form-control me-2" type="search" placeholder="Buscar película" id="search-input">
-                    <button class="btn btn-outline-light" type="submit">Buscar</button>
-                </form>
-                <button class="btn btn-danger ms-3" id="logout">Cerrar sesión</button>
+    <!-- Header Section -->
+    <header>
+        <!-- Main Navigation -->
+        <nav class="navbar navbar-expand-lg fixed-top" id="mainNav">
+            <div class="container-fluid px-4">
+                <div class="d-flex align-items-center">
+                    <a class="navbar-brand me-3" href="index.html">
+                        <img src="/assets/img/Logo-FavFlix.png" alt="FavFlix Logo" class="logo-img">
+                    </a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent" 
+                            aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                </div>
+
+
+                <!-- Navigation Content -->
+                <div class="collapse navbar-collapse" id="navbarContent">
+                    <!-- Primary Navigation -->
+                    <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="#">Inicio</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Peliculas</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Mis Favoritos</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Search Form and User Profile OUTSIDE the menu -->
+                <div class="nav-end d-flex align-items-center">
+                    <!-- Search Form -->
+                    <form class="search-form" role="search">
+                        <div class="search-wrapper">
+                            <button class="search-toggle" type="button">
+                                <i class="bi bi-search"></i>
+                            </button>
+                            <input class="search-input" type="search" placeholder="Título, género, actor" aria-label="Search">
+                        </div>
+                    </form>
+
+                    <!-- User Profile -->
+                    <div class="dropdown profile-wrapper">
+                        <button class="btn profile-btn" type="button">
+                            <i class="bi bi-person-circle profile-icon"></i>
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li><a class="dropdown-item" href="#">Perfil</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="#">Cerrar Sesión</a></li>
+                        </ul>
+                    </div>
+                </div>
             </div>
-        </div>
-    </nav>
-    
-    <!-- Hero Section -->
-    <header class="hero-section text-white text-center p-5" id="hero">
-        <div class="container">
-            <h1 id="hero-title">Película Destacada</h1>
-            <p id="hero-description">Descripción breve de la película...</p>
-            <button class="btn btn-primary" id="hero-more-info">Más Información</button>
-            <button class="btn btn-secondary" id="update-hero">Actualizar Recomendación</button>
-        </div>
+        </nav>
     </header>
-    
-    <!-- Sección Mi Lista -->
-    <section class="container mt-4" id="mi-lista" style="display: none;">
-        <h2 class="text-white">Mi Lista</h2>
-        <div class="row" id="mi-lista-contenido"></div>
-    </section>
-    
+
+    <!-- Main Content -->
+    <main>
+        <!-- Hero Section -->
+        <section class="hero-section">
+          <div class="hero-content">
+              <div class="container-fluid px-4">
+                  <div class="row">
+                      <div class="col-lg-6">
+                          <h1 class="hero-title"></h1>
+                          <p class="hero-description"></p>
+                          <div class="hero-actions">
+                              <button class="btn btn-secondary btn-lg info-btn">
+                                  <i class="bi bi-info-circle"></i> Más información
+                              </button>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+              <span class="age-rating"></span>
+          </div>
+          <div class="hero-overlay"></div>
+          <div class="hero-fade"></div>
+      </section>
+    </main>
+
+    <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom JS -->
     <script src="/assets/js/dashboard.js"></script>
 </body>
 </html>
