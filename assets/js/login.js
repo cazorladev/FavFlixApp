@@ -30,5 +30,5 @@ loginUser.addEventListener('submit', async (event) => {
     localStorage.setItem('loggedUser', JSON.stringify(userFound));
 
     alert("Inicio de sesión exitoso. Redirigiendo...");
-    window.location.href = '/index.html';
+    window.location.href = '/pages/dashboard.html';
 });

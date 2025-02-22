@@ -28,7 +28,7 @@
         <nav class="navbar navbar-expand-lg fixed-top" id="mainNav">
             <div class="container-fluid px-4">
                 <div class="d-flex align-items-center">
-                    <a class="navbar-brand me-3" href="index.html">
+                    <a class="navbar-brand me-3" href="./dashboard.html">
                         <img src="/assets/img/Logo-FavFlix.png" alt="FavFlix Logo" class="logo-img">
                     </a>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent" 
@@ -68,15 +68,17 @@
 
                     <!-- User Profile -->
                     <div class="dropdown profile-wrapper">
-                        <button class="btn profile-btn" type="button">
-                            <i class="bi bi-person-circle profile-icon"></i>
+                        <button class="btn profile-btn" type="button" id="profileDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                            <div class="profile-initials">?</div>
                         </button>
-                        <ul class="dropdown-menu dropdown-menu-end">
-                            <li><a class="dropdown-item" href="#">Perfil</a></li>
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="profileDropdown">
+                            <li><a class="dropdown-item" href="#"><i class="bi bi-person"></i> Ver Perfil</a></li>
+                            <li><a class="dropdown-item" href="#"><i class="bi bi-gear"></i> Configuración</a></li>
                             <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item" href="#">Cerrar Sesión</a></li>
+                            <li><a class="dropdown-item" href="#" id="logout"><i class="bi bi-box-arrow-right"></i> Cerrar Sesión</a></li>
                         </ul>
-                    </div>
+                    </div>                 
+                    
                 </div>
             </div>
         </nav>
