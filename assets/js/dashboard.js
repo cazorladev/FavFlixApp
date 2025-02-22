@@ -56,3 +56,6 @@ function removeFromFavorites(movieId) {
     localStorage.setItem('favorites', JSON.stringify(favorites));
     loadFavorites();
 }
+
+
+// Consumo de API para la sección catalogo
