@@ -135,7 +135,7 @@ document.addEventListener("DOMContentLoaded", async function () {
       }
     } catch (error) {
       console.error("Error obteniendo película en tendencia:", error);
-    
+
       if (heroTitle) heroTitle.textContent = "Error al cargar la película";
       if (heroDescription) {
         heroDescription.textContent =
@@ -161,7 +161,9 @@ document.addEventListener("DOMContentLoaded", async function () {
   const searchInput = document.querySelector(".search-input");
   searchToggle.addEventListener("click", () => {
     searchWrapper.classList.toggle("active");
-    if (searchWrapper.classList.contains("active")) searchInput.focus();
+    if (searchWrapper.classList.contains("active")) {
+      setTimeout(() => searchInput.focus(), 300); // Espera 300ms antes de aplicar focus
+    }
   });
 
   document.addEventListener("click", (e) => {
@@ -220,7 +222,6 @@ document.addEventListener("DOMContentLoaded", async function () {
     });
   });
 
-  // Menú en dispositivos móviles
   // Menú en dispositivos móviles
   if (navbarToggler && navbar) {
     navbarToggler.addEventListener("click", () => {
