@@ -59,6 +59,10 @@ body {
   gap: 0.5rem;
 }
 
+.navbar.menu-open {
+  background-color: var(--netflix-black);
+}
+
 /* Search Form Styles */
 .search-wrapper {
   position: relative;
@@ -79,7 +83,7 @@ body {
   right: 100%;
   background-color: var(--netflix-dark-gray);
   /* border: 1px solid var(--netflix-white); */
-  /* color: var(--netflix-white); */
+  color: var(--netflix-white);
   padding: 0.5rem;
   width: 0;
   opacity: 0;
