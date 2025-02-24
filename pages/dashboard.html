@@ -79,53 +79,62 @@
           <div class="nav-end d-flex align-items-center">
             <!-- Search Form -->
             <form class="search-form" role="search" id="searchForm">
-                <div class="search-wrapper">
-                  <button class="search-toggle" type="button">
-                    <i class="bi bi-search"></i>
-                  </button>
-                  <input class="search-input" type="search" placeholder="Título, género, actor" aria-label="Search" id="searchInput" required>
-                </div>
-              </form>
+              <div class="search-wrapper">
+                <button class="search-toggle" type="button">
+                  <i class="bi bi-search"></i>
+                </button>
+                <input
+                  class="search-input"
+                  type="search"
+                  placeholder="Título, género, actor"
+                  aria-label="Search"
+                  id="searchInput"
+                  required
+                />
+              </div>
+            </form>
 
             <!-- User Profile -->
             <div class="dropdown profile-wrapper">
-                <button
-                  class="btn profile-btn"
-                  type="button"
-                  id="profileDropdown"
-                  data-bs-toggle="dropdown"
-                  aria-expanded="false"
-                  aria-haspopup="true"
-                  aria-controls="profileMenu"
-                >
-                  <div class="profile-initials">?</div>
-                </button>
-                <ul
-                  class="dropdown-menu dropdown-menu-end"
-                  id="profileMenu"
-                  aria-labelledby="profileDropdown"
-                  role="menu"
-                >
-                  <li role="none"> <!-- Indica que este elemento no tiene un rol específico -->
-                    <a class="dropdown-item" href="#" role="menuitem"> <!-- Indica que este es un ítem del menú -->
-                      <i class="bi bi-person"></i> Ver Perfil
-                    </a>
-                  </li>
-                  <li role="none">
-                    <a class="dropdown-item" href="#" role="menuitem">
-                      <i class="bi bi-gear"></i> Configuración
-                    </a>
-                  </li>
-                  <li role="none">
-                    <hr class="dropdown-divider">
-                  </li>
-                  <li role="none">
-                    <a class="dropdown-item" href="#" id="logout" role="menuitem">
-                      <i class="bi bi-box-arrow-right"></i> Cerrar Sesión
-                    </a>
-                  </li>
-                </ul>
-              </div>
+              <button
+                class="btn profile-btn"
+                type="button"
+                id="profileDropdown"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+                aria-haspopup="true"
+                aria-controls="profileMenu"
+              >
+                <div class="profile-initials">?</div>
+              </button>
+              <ul
+                class="dropdown-menu dropdown-menu-end"
+                id="profileMenu"
+                aria-labelledby="profileDropdown"
+                role="menu"
+              >
+                <li role="none">
+                  <!-- Indica que este elemento no tiene un rol específico -->
+                  <a class="dropdown-item" href="#" role="menuitem">
+                    <!-- Indica que este es un ítem del menú -->
+                    <i class="bi bi-person"></i> Ver Perfil
+                  </a>
+                </li>
+                <li role="none">
+                  <a class="dropdown-item" href="#" role="menuitem">
+                    <i class="bi bi-gear"></i> Configuración
+                  </a>
+                </li>
+                <li role="none">
+                  <hr class="dropdown-divider" />
+                </li>
+                <li role="none">
+                  <a class="dropdown-item" href="#" id="logout" role="menuitem">
+                    <i class="bi bi-box-arrow-right"></i> Cerrar Sesión
+                  </a>
+                </li>
+              </ul>
+            </div>
           </div>
         </div>
       </nav>
@@ -153,6 +162,192 @@
         </div>
         <div class="hero-overlay"></div>
         <div class="hero-fade"></div>
+      </section>
+
+      <!-- Sección de tendencias de acción -->
+
+      <section class="trending py-5 bg-black text-white">
+        <div class="container">
+          <h2 class="mb-4 text-white">Tendencias de Acción</h2>
+          <div
+            id="carouselExample"
+            class="carousel slide"
+            data-bs-ride="carousel"
+          >
+            <div class="carousel-inner" id="carousel-container">
+              <!-- Las películas se insertan aquí dinámicamente -->
+            </div>
+            <button
+              class="carousel-control-prev"
+              type="button"
+              data-bs-target="#carouselExample"
+              data-bs-slide="prev"
+            >
+              <span
+                class="carousel-control-prev-icon"
+                aria-hidden="true"
+              ></span>
+            </button>
+            <button
+              class="carousel-control-next"
+              type="button"
+              data-bs-target="#carouselExample"
+              data-bs-slide="next"
+            >
+              <span
+                class="carousel-control-next-icon"
+                aria-hidden="true"
+              ></span>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Películas Populares -->
+      <section class="trending py-5 bg-black text-white">
+        <div class="container">
+          <h2 class="mb-4 text-white">Películas Populares</h2>
+          <div
+            id="popular-carousel"
+            class="carousel slide"
+            data-bs-ride="carousel"
+          >
+            <div class="carousel-inner" id="popular-carousel-container"></div>
+            <button
+              class="carousel-control-prev"
+              type="button"
+              data-bs-target="#popular-carousel"
+              data-bs-slide="prev"
+            >
+              <span
+                class="carousel-control-prev-icon"
+                aria-hidden="true"
+              ></span>
+            </button>
+            <button
+              class="carousel-control-next"
+              type="button"
+              data-bs-target="#popular-carousel"
+              data-bs-slide="next"
+            >
+              <span
+                class="carousel-control-next-icon"
+                aria-hidden="true"
+              ></span>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Películas Mejor Puntuadas -->
+      <section class="trending py-5 bg-black text-white">
+        <div class="container">
+          <h2 class="mb-4 text-white">Películas Mejor Puntuadas</h2>
+          <div
+            id="top-rated-carousel"
+            class="carousel slide"
+            data-bs-ride="carousel"
+          >
+            <div class="carousel-inner" id="top-rated-carousel-container"></div>
+            <button
+              class="carousel-control-prev"
+              type="button"
+              data-bs-target="#top-rated-carousel"
+              data-bs-slide="prev"
+            >
+              <span
+                class="carousel-control-prev-icon"
+                aria-hidden="true"
+              ></span>
+            </button>
+            <button
+              class="carousel-control-next"
+              type="button"
+              data-bs-target="#top-rated-carousel"
+              data-bs-slide="next"
+            >
+              <span
+                class="carousel-control-next-icon"
+                aria-hidden="true"
+              ></span>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Películas en Cartelera -->
+      <section class="trending py-5 bg-black text-white">
+        <div class="container">
+          <h2 class="mb-4 text-white">En Cartelera</h2>
+          <div
+            id="now-playing-carousel"
+            class="carousel slide"
+            data-bs-ride="carousel"
+          >
+            <div
+              class="carousel-inner"
+              id="now-playing-carousel-container"
+            ></div>
+            <button
+              class="carousel-control-prev"
+              type="button"
+              data-bs-target="#now-playing-carousel"
+              data-bs-slide="prev"
+            >
+              <span
+                class="carousel-control-prev-icon"
+                aria-hidden="true"
+              ></span>
+            </button>
+            <button
+              class="carousel-control-next"
+              type="button"
+              data-bs-target="#now-playing-carousel"
+              data-bs-slide="next"
+            >
+              <span
+                class="carousel-control-next-icon"
+                aria-hidden="true"
+              ></span>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Próximos Estrenos -->
+      <section class="trending py-5 bg-black text-white">
+        <div class="container">
+          <h2 class="mb-4 text-white">Próximos Estrenos</h2>
+          <div
+            id="upcoming-carousel"
+            class="carousel slide"
+            data-bs-ride="carousel"
+          >
+            <div class="carousel-inner" id="upcoming-carousel-container"></div>
+            <button
+              class="carousel-control-prev"
+              type="button"
+              data-bs-target="#upcoming-carousel"
+              data-bs-slide="prev"
+            >
+              <span
+                class="carousel-control-prev-icon"
+                aria-hidden="true"
+              ></span>
+            </button>
+            <button
+              class="carousel-control-next"
+              type="button"
+              data-bs-target="#upcoming-carousel"
+              data-bs-slide="next"
+            >
+              <span
+                class="carousel-control-next-icon"
+                aria-hidden="true"
+              ></span>
+            </button>
+          </div>
+        </div>
       </section>
     </main>
 
