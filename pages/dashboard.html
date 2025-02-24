@@ -6,6 +6,8 @@
     <title>FavFlix</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="/assets/css/dashboard.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="/assets/css/dashboardCatalogo.css">
 </head>
 <body>
     <!-- Navbar -->
@@ -45,30 +47,35 @@
         <div class="row" id="mi-lista-contenido"></div>
     </section>
 
-    <!-- Sección Catalogo de películas -->
-    <main class="catalogos">
-        <section class="Catalogo-peliculas">
-            <h2>Películas Populares</h2>
-            <div class="peliculas" id="populares">
+    <!-- Prueba  -->
+    <style>
+        /* Estilos para el carrusel de películas */
 
-            </div>
-        </section>
-        <section class="Catalogo-peliculas">
-            <h2>Películas de Estreno</h2>
-            <div class="peliculas" id="estreno">
+    </style>
 
-            </div>
-        </section>
-        <section class="Catalogo-peliculas">
-            <h2>Películas más vistas</h2>
-            <div class="peliculas" id="vistas">
+    <!-- Sección de Películas Populares (Carrusel) -->
 
-            </div>
-        </section>
-    </main>
+    <!-- Carrusel - Catalogo -->
+    <section class="Catalogo-peliculas">
+        <h5 class="my-3">Películas Populares</h5>
+        <div class="peliculas d-flex overflow-x-auto" id="populares">
+        </div>
+    </section>
+    <section class="Catalogo-peliculas">
+        <h5 class="my-3">Películas de Estreno</h5>
+        <div class="peliculas d-flex overflow-x-auto" id="estrenos">
+        </div>
+    </section>
+    <section class="Catalogo-peliculas">
+        <h5 class="my-3">Películas más vistas</h5>
+        <div class="peliculas d-flex overflow-x-auto" id="vistas">
+        </div>
+    </section>
+
 
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="/assets/js/dashboard.js"></script>
+    <script src="/assets/js/dashboardCatalogo.js"></script>
 </body>
 </html>

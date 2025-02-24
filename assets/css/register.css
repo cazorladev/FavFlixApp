@@ -52,3 +52,8 @@ a {
 }
 
 /* Subir */
+
+.modal-content {
+    color: whitesmoke;
+    max-width: 700px;
+}
