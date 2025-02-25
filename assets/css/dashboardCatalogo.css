@@ -1,0 +1,80 @@
+.peliculas {
+    /* scroll-behavior: smooth; */
+    /* white-space: nowrap; */
+    padding: 10px 0;
+}
+
+.peliculas::-webkit-scrollbar {
+    height: 5px;
+}
+
+.peliculas::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 4px;
+}
+
+.peliculas::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+.card {
+    position: relative;
+    min-width: 200px;
+    max-width: 250px;
+    flex: 0 0 auto;
+    margin-right: 10px;
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    overflow: hidden;
+    border-radius: 10px;
+    background-color: #222;
+}
+
+/* Evita que todas se expandan, solo afecta a la tarjeta en hover */
+.card:hover {
+    transform: scale(1.2);
+    z-index: 15;
+    box-shadow: 0px 8px 16px rgba(255, 255, 255, 0.2); /* Sombra para destacar */
+}
+
+/* Ocultar el contenido adicional hasta que se haga hover */
+.card-body {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+}
+
+/* Solo se muestra cuando se hace hover sobre la tarjeta */
+.card:hover .card-body {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+
+.genres {
+    list-style: none; /* Elimina los estilos de lista */
+    color: aliceblue;
+    font-size: 11px;
+    justify-content: start;
+    padding: 0;
+    gap: 5px; /* Espaciado entre los géneros */
+}
+.genres li::before {
+    content: "•"; /* Agrega el punto antes de cada género */
+    margin-right: 5px;
+    color: grey;
+}
+
+.genres li:first-child::before {
+    content: ""; /* Elimina el punto del primer elemento */
+}
+
+/* Botones */
+.btn-outline-secondary {
+    border-radius: 30%;
+}

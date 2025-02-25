@@ -1,117 +1,238 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-
-    <title>FavFlix: Tu plataforma de películas favorita</title>
-
-    <meta name="description" content="FavFlix te permite guardar, organizar y compartir tus películas favoritas en un solo lugar.">
-    <meta name="author" content="FavFlix - Grupo 1">
-    <meta name="robots" content="index, follow">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>FavFlixTEMP</title>
+    <meta
+      name="description"
+      content="FavFlix te permite guardar, organizar y compartir tus películas favoritas en un solo lugar."
+    />
+    <meta name="author" content="FavFlix - Grupo 1" />
+    <meta name="robots" content="index, follow" />
 
     <!-- Favicon -->
-    <link rel="icon" href="/assets/img/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="../assets/img/favicon.ico" type="image/x-icon" />
+
     <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+
     <!-- Bootstrap Icons -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+    />
+
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="/assets/css/dashboard.css">
-</head>
-<body>
+    <link rel="stylesheet" href="../assets/css/dashboard.css" />
+  </head>
+  <body>
     <!-- Header Section -->
     <header>
-        <!-- Main Navigation -->
-        <nav class="navbar navbar-expand-lg fixed-top" id="mainNav">
-            <div class="container-fluid px-4">
-                <div class="d-flex align-items-center">
-                    <a class="navbar-brand me-3" href="./dashboard.html">
-                        <img src="/assets/img/Logo-FavFlix.png" alt="FavFlix Logo" class="logo-img">
-                    </a>
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent" 
-                            aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                </div>
+      <!-- Main Navigation -->
+      <nav class="navbar navbar-expand-lg fixed-top" id="mainNav">
+        <div class="container-fluid px-4">
+          <div class="d-flex align-items-center">
+            <a class="navbar-brand me-3" href="./dashboard.html">
+              <img
+                src="../assets/img/Logo-FavFlix.png"
+                alt="FavFlix Logo"
+                class="logo-img"
+              />
+            </a>
+            <button
+              class="navbar-toggler"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#navbarContent"
+              aria-controls="navbarContent"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+            >
+              <span class="navbar-toggler-icon"></span>
+            </button>
+          </div>
 
+          <!-- Navigation Content -->
+          <div class="collapse navbar-collapse" id="navbarContent">
+            <!-- Primary Navigation -->
+            <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="#"
+                  >Inicio</a
+                >
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Peliculas</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#" id="favoritesLink">Mis Favoritos</a>
+              </li>
+            </ul>
+          </div>
 
-                <!-- Navigation Content -->
-                <div class="collapse navbar-collapse" id="navbarContent">
-                    <!-- Primary Navigation -->
-                    <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
-                        <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="#">Inicio</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Peliculas</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Mis Favoritos</a>
-                        </li>
-                    </ul>
-                </div>
+          <!-- Search Form and User Profile OUTSIDE the menu -->
+          <div class="nav-end d-flex align-items-center">
+            <!-- Search Form -->
+            <form class="search-form" role="search" id="searchForm">
+              <div class="search-wrapper">
+                <button class="search-toggle" type="button">
+                  <i class="bi bi-search"></i>
+                </button>
+                <input
+                  class="search-input"
+                  type="search"
+                  placeholder="Título, género, actor"
+                  aria-label="Search"
+                  id="searchInput"
+                  required
+                />
+                <div class="search-results"></div>
+              </div>
+            </form>
 
-                <!-- Search Form and User Profile OUTSIDE the menu -->
-                <div class="nav-end d-flex align-items-center">
-                    <!-- Search Form -->
-                    <form class="search-form" role="search">
-                        <div class="search-wrapper">
-                            <button class="search-toggle" type="button">
-                                <i class="bi bi-search"></i>
-                            </button>
-                            <input class="search-input" type="search" placeholder="Título, género, actor" aria-label="Search">
-                        </div>
-                    </form>
-
-                    <!-- User Profile -->
-                    <div class="dropdown profile-wrapper">
-                        <button class="btn profile-btn" type="button" id="profileDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-                            <div class="profile-initials">?</div>
-                        </button>
-                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="profileDropdown">
-                            <li><a class="dropdown-item" href="#"><i class="bi bi-person"></i> Ver Perfil</a></li>
-                            <li><a class="dropdown-item" href="#"><i class="bi bi-gear"></i> Configuración</a></li>
-                            <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item" href="#" id="logout"><i class="bi bi-box-arrow-right"></i> Cerrar Sesión</a></li>
-                        </ul>
-                    </div>                 
-                    
-                </div>
+            <!-- User Profile -->
+            <div class="dropdown profile-wrapper">
+              <button
+                class="btn profile-btn"
+                type="button"
+                id="profileDropdown"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+                aria-haspopup="true"
+                aria-controls="profileMenu"
+              >
+                <div class="profile-initials">?</div>
+              </button>
+              <ul
+                class="dropdown-menu dropdown-menu-end"
+                id="profileMenu"
+                aria-labelledby="profileDropdown"
+                role="menu"
+              >
+                <li role="none">
+                  <!-- Indica que este elemento no tiene un rol específico -->
+                  <a class="dropdown-item" href="#" role="menuitem">
+                    <!-- Indica que este es un ítem del menú -->
+                    <i class="bi bi-person"></i> Ver Perfil
+                  </a>
+                </li>
+                <li role="none">
+                  <a class="dropdown-item" href="#" role="menuitem">
+                    <i class="bi bi-gear"></i> Configuración
+                  </a>
+                </li>
+                <li role="none">
+                  <hr class="dropdown-divider" />
+                </li>
+                <li role="none">
+                  <a class="dropdown-item" href="#" id="logout" role="menuitem">
+                    <i class="bi bi-box-arrow-right"></i> Cerrar Sesión
+                  </a>
+                </li>
+              </ul>
             </div>
-        </nav>
+          </div>
+        </div>
+      </nav>
     </header>
 
     <!-- Main Content -->
     <main>
-        <!-- Hero Section -->
-        <section class="hero-section">
-          <div class="hero-content">
-              <div class="container-fluid px-4">
-                  <div class="row">
-                      <div class="col-lg-6">
-                          <h1 class="hero-title"></h1>
-                          <p class="hero-description"></p>
-                          <div class="hero-actions">
-                              <button class="btn btn-secondary btn-lg info-btn">
-                                  <i class="bi bi-info-circle"></i> Más información
-                              </button>
-                          </div>
-                      </div>
-                  </div>
+      <!-- Hero Section -->
+      <section class="hero-section">
+        <div class="hero-content">
+          <div class="container-fluid px-4">
+            <div class="row">
+              <div class="col-lg-6">
+                <h1 class="hero-title"></h1>
+                <p class="hero-description"></p>
+                <div class="hero-actions">
+                  <button class="btn btn-secondary btn-lg info-btn">
+                    <i class="bi bi-info-circle"></i> Más información
+                  </button>
+                </div>
               </div>
-              <span class="age-rating"></span>
+            </div>
           </div>
-          <div class="hero-overlay"></div>
-          <div class="hero-fade"></div>
+          <span class="age-rating"></span>
+        </div>
+        <div class="hero-overlay"></div>
+        <div class="hero-fade"></div>
       </section>
+      >
+      
+      <section class="Catalogo-peliculas">
+        <h5 class="my-3">Películas Populares</h5>
+        <div class="peliculas d-flex overflow-x-auto" id="populares"></div>
+      </section>
+      <section class="Catalogo-peliculas">
+        <h5 class="my-3">Películas de Estreno</h5>
+        <div class="peliculas d-flex overflow-x-auto" id="estrenos"></div>
+      </section>
+      <section class="Catalogo-peliculas">
+        <h5 class="my-3">Películas más vistas</h5>
+        <div class="peliculas d-flex overflow-x-auto" id="vistas"></div>
+      </section>
+      <section class="Catalogo-peliculas">
+        <h5 class="my-3">Resultados de búsqueda</h5>
+        <div class="peliculas d-flex overflow-x-auto" id="resultados-busqueda"></div>
+      </section>
+
+      <!-- Modal de Película -->
+      <!-- Modal -->
+<div class="modal fade" id="movieModal" tabindex="-1" aria-labelledby="movieModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="movieModalLabel">Información de la Película</h5>
+        <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
+      </div>
+      <div class="modal-body">
+        <h6 id="movieTitle"></h6>
+        <img id="movieImage" src="" alt="Poster de la Película" class="img-fluid mb-3">
+        <p id="movieDescription"></p>
+        <p><strong>Año:</strong> <span id="movieYear"></span></p>
+        <p><strong>Género:</strong> <span id="movieGenre"></span></p>
+        <button id="favoriteButton" class="btn btn-danger"></button>
+      </div>
+      <!-- <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+      </div> -->
+    </div>
+  </div>
+</div>
+
+
+      <!-- Modal de Favoritos -->
+      <div class="modal fade" id="favoritesModal" tabindex="-1" aria-labelledby="favoritesModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="favoritesModalLabel">Mis Favoritos</h5>
+              <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
+            </div>
+            <div class="modal-body">
+              <div id="favoritesContainer"></div>
+            </div>
+            <!-- <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+            </div> -->
+          </div>
+        </div>
+      </div>
+      
     </main>
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
     <!-- Custom JS -->
-    <script src="/assets/js/dashboard.js"></script>
-</body>
+    <script src="../assets/js/dashboard.js"></script>
+    <!-- <script src="../assets/js/dashboardCatalogo.js"></script> -->
+  </body>
 </html>

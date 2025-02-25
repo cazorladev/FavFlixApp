@@ -12,12 +12,23 @@ body {
   background-color: var(--netflix-black);
   color: var(--netflix-white);
   font-family: "Helvetica Neue", Arial, sans-serif;
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 /* Navigation Styles */
 #mainNav {
   background: linear-gradient(180deg, rgba(0, 0, 0, 0.7) 0%, transparent 100%);
-  transition: background-color var(--transition-speed);
+  /* transition: background-color var(--transition-speed); */
+  transition: background-color 0.5s ease-in-out;
   padding: 0.5rem 0;
 }
 
@@ -59,11 +70,33 @@ body {
   gap: 0.5rem;
 }
 
-/* Search Form Styles */
+.navbar.menu-open {
+  background-color: var(--netflix-black);
+}
+
+/* Estilos para la lista de autocompletado */
+.search-results {
+  position: absolute;
+  top: calc(100% + 5px); /* Baja 5px más para evitar solapamiento */
+  left: 0;
+  width: 100%; /* Ocupa todo el ancho del input */
+  background: var(--netflix-dark-gray);
+  border-radius: 5px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+  max-height: 300px;
+  overflow-y: auto;
+  z-index: 1000;
+}
+
 .search-wrapper {
   position: relative;
   display: flex;
   align-items: center;
+  width: auto;
+}
+
+.search-wrapper.active .search-results {
+  display: block;
 }
 
 .search-toggle {
@@ -78,20 +111,75 @@ body {
   position: absolute;
   right: 100%;
   background-color: var(--netflix-dark-gray);
-  /* border: 1px solid var(--netflix-white); */
-  /* color: var(--netflix-white); */
+  color: var(--netflix-white);
   padding: 0.5rem;
-  width: 0;
+  min-width: 250px;
   opacity: 0;
-  /* transition: all var(--transition-speed); */
-  transition: width 0.2s ease-in-out, opacity 0.2s ease-in-out;
   border: none;
+  transition: width 0.4s ease-in-out, opacity 0.4s ease-in-out;
+}
+
+.search-results.active {
+  width: 100%; /* Hace que la lista ocupe todo el ancho de la barra */
+}
+
+.search-item {
+  padding: 10px;
+  cursor: pointer;
+  color: var(--netflix-white);
+  font-size: 1rem;
+  transition: background 0.3s ease-in-out;
+}
+
+.search-item:hover {
+  background: var(--netflix-red);
 }
 
 .search-wrapper.active .search-input {
-  width: 180px;
+  width: 300px !important; /* Hace que la barra de búsqueda sea más grande al expandirse */
   opacity: 1;
-  /* padding: 0.5rem 1rem; */
+  padding: 0.5rem 1rem;
+}
+
+#search-results-section {
+  padding: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.search-results-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  justify-content: center;
+  max-width: 1200px;
+  margin: auto;
+}
+
+.search-card {
+  width: 180px;
+  background: var(--netflix-dark-gray);
+  padding: 10px;
+  border-radius: 10px;
+  text-align: center;
+  transition: transform 0.3s ease-in-out;
+}
+
+.search-card img {
+  width: 100%;
+  border-radius: 5px;
+}
+
+.search-card h5 {
+  font-size: 1rem;
+  margin-top: 8px;
+  color: var(--netflix-white);
+}
+
+.search-card:hover {
+  transform: scale(1.05);
+  cursor: pointer;
 }
 
 .profile-btn {
@@ -121,12 +209,6 @@ body {
 }
 
 /* Dropdown Menu */
-.profile-wrapper:hover .dropdown-menu {
-  display: block;
-  opacity: 1;
-  visibility: visible;
-}
-
 .dropdown-menu {
   display: none;
   opacity: 0;
@@ -135,17 +217,43 @@ body {
   right: 0;
   left: auto;
   transform-origin: top right;
+  z-index: 1050;
+}
+
+.profile-wrapper:hover .dropdown-menu {
+  display: block;
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
 }
 
 /* Hero Section Styles */
 .hero-section {
   position: relative;
   height: 100vh;
-  background-image: url("../assets/uncharted-hero.jpg");
-  background-size: cover;
-  background-position: center;
+  background-size: contain; /* Cambia de cover a contain en pantallas pequeñas */
+  background-position: center top; /* Centra mejor la imagen */
+  background-repeat: no-repeat;
   display: flex;
   align-items: center;
+  justify-content: flex-start;
+  overflow: hidden;
+}
+
+.hero-section::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    to right,
+    rgba(0, 0, 0, 0.8) 15%,
+    rgba(0, 0, 0, 0.5) 40%,
+    rgba(0, 0, 0, 0) 70%
+  );
+  z-index: 1;
 }
 
 .hero-content {
@@ -189,7 +297,6 @@ body {
   max-width: 2000px; /* Limita el ancho de la descripción a la mitad de la pantalla */
   margin-bottom: 1.5rem;
   text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
-  font-size: 1rem;
 }
 
 .hero-actions {
@@ -205,6 +312,18 @@ body {
   padding: 0.5rem 1rem;
   font-size: 1.1rem;
   background-color: rgba(109, 109, 109, 0.7);
+  border-radius: 5px; /* Agrega bordes redondeados */
+}
+
+/* Animación en el hover de los botones */
+button,
+.btn {
+  transition: transform 0.2s ease-in-out;
+}
+
+button:hover,
+.btn:hover {
+  transform: scale(1.05);
 }
 
 /* Age Rating */
@@ -226,7 +345,104 @@ body {
   box-sizing: border-box;
 }
 
+.peliculas {
+  padding: 10px 0;
+}
+
+.peliculas::-webkit-scrollbar {
+  height: 5px;
+}
+
+.peliculas::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 4px;
+}
+
+.peliculas::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+.card {
+  position: relative;
+  min-width: 200px;
+  max-width: 250px;
+  flex: 0 0 auto;
+  margin-right: 10px;
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  overflow: hidden;
+  border-radius: 10px;
+  background-color: #222;
+  animation: fadeInUp 0.5s ease-in-out;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Evita que todas se expandan, solo afecta a la tarjeta en hover */
+.card:hover {
+  transform: scale(1.2);
+  z-index: 15;
+  box-shadow: 0px 8px 16px rgba(255, 255, 255, 0.2); /* Sombra para destacar */
+}
+
+/* Ocultar el contenido adicional hasta que se haga hover */
+.card-body {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  color: white;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+}
+
+/* Solo se muestra cuando se hace hover sobre la tarjeta */
+.card:hover .card-body {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.genres {
+  list-style: none; /* Elimina los estilos de lista */
+  color: aliceblue;
+  font-size: 11px;
+  justify-content: start;
+  padding: 0;
+  gap: 5px; /* Espaciado entre los géneros */
+}
+.genres li::before {
+  content: "•"; /* Agrega el punto antes de cada género */
+  margin-right: 5px;
+  color: grey;
+}
+
+.genres li:first-child::before {
+  content: ""; /* Elimina el punto del primer elemento */
+}
+
+/* Botones */
+.btn-outline-secondary {
+  border-radius: 30%;
+}
+
 /* Responsive Styles */
+@media (max-width: 1200px) {
+  .trend-item {
+    min-width: 160px; /* Reduce el tamaño de las tarjetas */
+    height: 240px;
+  }
+}
+
 @media (max-width: 991px) {
   .nav-end {
     gap: 0.3rem;
@@ -252,9 +468,10 @@ body {
   .age-rating {
     font-size: 1rem; /* Ajusta el tamaño de la fuente en pantallas más pequeñas */
   }
+
 }
 
-@media (max-width: 767px) {
+@media (max-width: 768px) {
   .hero-title {
     font-size: 2.5rem;
   }
@@ -267,3 +484,24 @@ body {
     flex-wrap: wrap;
   }
 }
+
+@media (max-width: 480px) {
+  /* .trend-group {
+    gap: 10px;
+  } */
+
+  
+}
+
+.modal-body {
+  background-color: black;
+}
+
+.modal-header {
+  background-color: black;
+}
+
+.modal-footer {
+  background-color: black;
+}
+
