@@ -1,192 +1,292 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <!-- Codificación de caracteres y configuración de la vista -->
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <!-- Codificación de caracteres y configuración de la vista -->
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <!-- Compatibilidad con navegadores antiguos (opcional, pero recomendado) -->
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- Compatibilidad con navegadores antiguos (opcional, pero recomendado) -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
-  <!-- Título de la página -->
-  <title>FavFlix: Tu plataforma de películas favorita</title>
+    <!-- Título de la página -->
+    <title>FavFlix: Tu plataforma de películas favorita</title>
 
-  <!-- Descripción (Importante para SEO y accesibilidad) -->
-  <meta name="description" content="FavFlix te permite guardar, organizar y compartir tus películas favoritas en un solo lugar.">
+    <!-- Descripción (Importante para SEO y accesibilidad) -->
+    <meta
+      name="description"
+      content="FavFlix te permite guardar, organizar y compartir tus películas favoritas en un solo lugar."
+    />
 
-  <!-- Autor del sitio -->
-  <meta name="author" content="FavFlix - Grupo 1">
+    <!-- Autor del sitio -->
+    <meta name="author" content="FavFlix - Grupo 1" />
 
-  <!-- Indexación en buscadores -->
-  <meta name="robots" content="index, follow">
+    <!-- Indexación en buscadores -->
+    <meta name="robots" content="index, follow" />
 
-  <!-- Favicon -->
-  <link rel="icon" href="./assets/img/favicon.ico" type="image/x-icon">
+    <!-- Favicon -->
+    <link rel="icon" href="./assets/img/favicon.ico" type="image/x-icon" />
 
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-  <link rel="stylesheet" href="./assets/css/styles.css">
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
-</head>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="./assets/css/styles.css" />
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
 
-<body>
-      <!-- Navbar -->
-      <nav class="navbar navbar-expand-lg navbar-dark bg-transparent position-absolute w-100">
-        <div class="container">
-            <a class="navbar-brand" href="index.html">
-                <img src="./assets/img/Logo-FavFlix.png" alt="Logo de FavFlix" height="50">
-            </a>
-            <div class="ms-auto">
-                <button class="btn btn-danger" onclick="location.href='/pages/login.html'">Iniciar sesión</button>
-            </div>
-        </div>
-    </nav>
-    
-    <!-- Hero Section -->
-    <header class="hero text-center text-white d-flex align-items-center justify-content-center">
+  <body>
+    <!-- Navbar -->
+    <nav
+      class="navbar navbar-expand-lg navbar-dark bg-transparent position-absolute w-100"
+    >
       <div class="container">
-          <h1 class="fw-bold">Tu lista de películas favoritas en un solo lugar</h1>
-          <p class="lead">Guarda, organiza y descubre nuevas películas con FavFlix.</p>
-          <button class="btn btn-danger btn-lg mt-3" aria-label="Registrarse en FavFlix" onclick="location.href='/pages/register.html'">Registrar Ahora</button>
+        <a class="navbar-brand" href="index.html">
+          <img
+            src="./assets/img/Logo-FavFlix.png"
+            alt="Logo de FavFlix"
+            height="50"
+          />
+        </a>
+        <div class="ms-auto">
+          <button
+            class="btn btn-danger"
+            onclick="location.href='/pages/login.html'"
+          >
+            Iniciar sesión
+          </button>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header
+      class="hero text-center text-white d-flex align-items-center justify-content-center"
+    >
+      <div class="container">
+        <h1 class="fw-bold">
+          Tu lista de películas favoritas en un solo lugar
+        </h1>
+        <p class="lead">
+          Guarda, organiza y descubre nuevas películas con FavFlix.
+        </p>
+        <button
+          class="btn btn-danger btn-lg mt-3"
+          aria-label="Registrarse en FavFlix"
+          onclick="location.href='/pages/register.html'"
+        >
+          Registrar Ahora
+        </button>
       </div>
     </header>
 
-        <!-- Sección de tendencias -->
-        <section class="trending py-5 bg-black text-white">
-            <div class="container">
-                <h2 class="mb-4 text-white">Tendencias</h2>
-                <div id="carouselExample" class="carousel slide" data-bs-ride="carousel">
-                    <div class="carousel-inner" id="carousel-container">
-                        <!-- Las películas se insertarán aquí dinámicamente -->
-                    </div>
-                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev" aria-label="Película anterior">
-                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    </button>
-                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next" aria-label="Película siguiente">
-                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    </button>
-                </div>
-            </div>
-        </section>
-        
-      
-      <!-- Sección de beneficios -->
-      <section class="features py-5 bg-black text-white text-center">
-        <div class="container">
-            <h2 class="mb-4 text-danger fw-bold">¿Por qué elegir FavFlix?</h2>
-            <div class="row g-4">
-                <div class="col-md-3">
-                    <div class="feature-card p-4 rounded shadow-lg bg-gradient text-white position-relative overflow-hidden">
-                        <div class="feature-overlay"></div>
-                        <span class="material-icons feature-icon mb-3">bookmark</span>
-                        <h3 class="mt-3 fw-semibold">Guarda tus favoritos</h3>
-                        <p>Agrega películas a tu lista personal y accede a ellas cuando quieras.</p>
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="feature-card p-4 rounded shadow-lg bg-gradient text-white position-relative overflow-hidden">
-                        <div class="feature-overlay"></div>
-                        <span class="material-icons feature-icon mb-3">share</span>
-                        <h3 class="mt-3 fw-semibold">Comparte con amigos</h3>
-                        <p>Crea listas públicas y compártelas con otros cinéfilos.</p>
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="feature-card p-4 rounded shadow-lg bg-gradient text-white position-relative overflow-hidden">
-                        <div class="feature-overlay"></div>
-                        <span class="material-icons feature-icon mb-3">movie_filter</span>
-                        <h3 class="mt-3 fw-semibold">Descubre nuevas películas</h3>
-                        <p>Recibe recomendaciones según tus gustos y explora nuevas opciones.</p>
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="feature-card p-4 rounded shadow-lg bg-gradient text-white position-relative overflow-hidden">
-                        <div class="feature-overlay"></div>
-                        <span class="material-icons feature-icon mb-3">devices</span>
-                        <h3 class="mt-3 fw-semibold">Accede desde cualquier lugar</h3>
-                        <p>Disfruta de tu lista en móvil, tablet o computadora.</p>
-                    </div>
-                </div>
-            </div>
+    <!-- Sección de tendencias -->
+    <section class="trending py-5 bg-black text-white">
+      <div class="container">
+        <h2 class="mb-4 text-white">Tendencias</h2>
+        <div
+          id="carouselExample"
+          class="carousel slide"
+          data-bs-ride="carousel"
+          data-bs-interval="3000"
+          data-bs-touch="true"
+        >
+          <div class="carousel-inner" id="carousel-container">
+            <!-- Las películas se insertarán aquí dinámicamente -->
+          </div>
+          <button
+            class="carousel-control-prev"
+            type="button"
+            data-bs-target="#carouselExample"
+            data-bs-slide="prev"
+            aria-label="Película anterior"
+          >
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          </button>
+          <button
+            class="carousel-control-next"
+            type="button"
+            data-bs-target="#carouselExample"
+            data-bs-slide="next"
+            aria-label="Película siguiente"
+          >
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          </button>
         </div>
+      </div>
+    </section>
+
+    <!-- Sección de beneficios -->
+    <section class="features py-5 bg-black text-white text-center">
+      <div class="container">
+        <h2 class="mb-4 text-danger fw-bold">¿Por qué elegir FavFlix?</h2>
+        <div class="row g-4">
+          <div class="col-sm-6 col-md-3">
+            <div
+              class="feature-card p-4 rounded shadow-lg bg-gradient text-white position-relative overflow-hidden"
+            >
+              <div class="feature-overlay"></div>
+              <span class="material-icons feature-icon mb-3">bookmark</span>
+              <h3 class="mt-3 fw-semibold">Guarda tus favoritos</h3>
+              <p>
+                Agrega películas a tu lista personal y accede a ellas cuando
+                quieras.
+              </p>
+            </div>
+          </div>
+          <div class="col-sm-6 col-md-3">
+            <div
+              class="feature-card p-4 rounded shadow-lg bg-gradient text-white position-relative overflow-hidden"
+            >
+              <div class="feature-overlay"></div>
+              <span class="material-icons feature-icon mb-3">share</span>
+              <h3 class="mt-3 fw-semibold">Comparte con amigos</h3>
+              <p>Crea listas públicas y compártelas con otros cinéfilos.</p>
+            </div>
+          </div>
+          <div class="col-sm-6 col-md-3">
+            <div
+              class="feature-card p-4 rounded shadow-lg bg-gradient text-white position-relative overflow-hidden"
+            >
+              <div class="feature-overlay"></div>
+              <span class="material-icons feature-icon mb-3">movie_filter</span>
+              <h3 class="mt-3 fw-semibold">Descubre nuevas películas</h3>
+              <p>
+                Recibe recomendaciones según tus gustos y explora nuevas
+                opciones.
+              </p>
+            </div>
+          </div>
+          <div class="col-sm-6 col-md-3">
+            <div
+              class="feature-card p-4 rounded shadow-lg bg-gradient text-white position-relative overflow-hidden"
+            >
+              <div class="feature-overlay"></div>
+              <span class="material-icons feature-icon mb-3">devices</span>
+              <h3 class="mt-3 fw-semibold">Accede desde cualquier lugar</h3>
+              <p>Disfruta de tu lista en móvil, tablet o computadora.</p>
+            </div>
+          </div>
+        </div>
+      </div>
     </section>
 
     <!-- Modal -->
     <div id="movieModal" class="modal fade" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-xl">
-            <div class="modal-content">
-                <!-- Botón de cierre (X) -->
-                <button type="button" class="close-btn" data-bs-dismiss="modal" aria-label="Cerrar">
-                    &times;
-                </button>
-    
-                <div class="modal-body p-0">
-                    <div class="modal-banner">
-                        <img id="movieImage" class="modal-img" alt="Imagen de la película">
-                    </div>
-                    <div class="modal-info">
-                        <h2 id="movieTitle" class="movie-title"></h2>
-                        <div class="movie-meta">
-                            <span id="movieYear"></span> |
-                            <span id="movieGenres"></span> |
-                            <span>16+</span>
-                        </div>
-                        <p id="movieOverview" class="movie-overview"></p>
-                        <button class="btn btn-netflix" onclick="location.href='/pages/register.html'">Comienza ya</button>
-                    </div>
-                </div>
+      <div class="modal-dialog modal-dialog-centered modal-xl">
+        <div class="modal-content">
+          <!-- Botón de cierre (X) -->
+          <button
+            type="button"
+            class="close-btn"
+            data-bs-dismiss="modal"
+            aria-label="Cerrar"
+          >
+            &times;
+          </button>
+
+          <div class="modal-body p-0">
+            <div class="modal-banner">
+              <img
+                id="movieImage"
+                class="modal-img"
+                alt="Imagen de la película"
+              />
             </div>
+            <div class="modal-info">
+              <h2 id="movieTitle" class="movie-title"></h2>
+              <div class="movie-meta">
+                <span id="movieYear"></span> | <span id="movieGenres"></span> |
+                <span>16+</span>
+              </div>
+              <p id="movieOverview" class="movie-overview"></p>
+              <button
+                class="btn btn-netflix"
+                onclick="location.href='/pages/register.html'"
+              >
+                Comienza ya
+              </button>
+            </div>
+          </div>
         </div>
+      </div>
     </div>
-  
-  
-  
-      <!-- Footer -->
-      <footer class="bg-black text-light py-4">
-        <div class="container">
-            <div class="row text-center text-md-start">
-                <!-- Redes Sociales -->
-                <div class="col-md-4 mb-3">
-                    <h5>Síguenos en</h5>
-                    <div class="d-flex justify-content-center justify-content-md-start">
-                        <a href="https://www.facebook.com" target="_blank" class="social-icon">
-                            <i class="fab fa-facebook-f"></i>
-                        </a>
-                        <a href="https://www.twitter.com" target="_blank" class="social-icon">
-                            <i class="fab fa-twitter"></i>
-                        </a>
-                        <a href="https://www.instagram.com" target="_blank" class="social-icon">
-                            <i class="fab fa-instagram"></i>
-                        </a>
-                        <a href="https://www.youtube.com" target="_blank" class="social-icon">
-                            <i class="fab fa-youtube"></i>
-                        </a>
-                    </div>
-                </div>
-    
-                <!-- Enlaces útiles -->
-                <div class="col-md-4 mb-3">
-                    <h5>Enlaces Rápidos</h5>
-                    <ul class="list-unstyled">
-                        <li><a href="#">Términos y Condiciones</a></li>
-                        <li><a href="#">Política de Privacidad</a></li>
-                        <li><a href="#">Centro de Ayuda</a></li>
-                        <li><a href="#">Contáctanos</a></li>
-                    </ul>
-                </div>
-    
-                <!-- Copyright -->
-                <div class="col-md-4 text-center text-md-end">
-                    <p class="mb-0">&copy; 2025 FavFlix. Solo con fines educativos.</p>
-                </div>
+
+    <!-- Footer -->
+    <footer class="bg-black text-light py-4">
+      <div class="container">
+        <div class="row text-center text-md-start">
+          <!-- Redes Sociales -->
+          <div class="col-md-4 mb-3">
+            <h5>Síguenos en</h5>
+            <div class="d-flex justify-content-center justify-content-md-start">
+              <a
+                href="https://www.facebook.com"
+                target="_blank"
+                class="social-icon"
+              >
+                <i class="fab fa-facebook-f"></i>
+              </a>
+              <a
+                href="https://www.twitter.com"
+                target="_blank"
+                class="social-icon"
+              >
+                <i class="fab fa-twitter"></i>
+              </a>
+              <a
+                href="https://www.instagram.com"
+                target="_blank"
+                class="social-icon"
+              >
+                <i class="fab fa-instagram"></i>
+              </a>
+              <a
+                href="https://www.youtube.com"
+                target="_blank"
+                class="social-icon"
+              >
+                <i class="fab fa-youtube"></i>
+              </a>
             </div>
+          </div>
+
+          <!-- Enlaces útiles -->
+          <div class="col-md-4 mb-3">
+            <h5>Enlaces Rápidos</h5>
+            <ul class="list-unstyled">
+              <li><a href="#">Términos y Condiciones</a></li>
+              <li><a href="#">Política de Privacidad</a></li>
+              <li><a href="#">Centro de Ayuda</a></li>
+              <li><a href="#">Contáctanos</a></li>
+            </ul>
+          </div>
+
+          <!-- Copyright -->
+          <div class="col-md-4 text-center text-md-end">
+            <p class="mb-0">&copy; 2025 FavFlix. Solo con fines educativos.</p>
+          </div>
         </div>
+      </div>
     </footer>
-    
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-  <script src="./assets/js/main.js"></script>
-</body>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+      crossorigin="anonymous"
+    ></script>
+    <script src="./assets/js/main.js"></script>
+  </body>
 </html>
-

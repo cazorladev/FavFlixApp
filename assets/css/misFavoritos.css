@@ -1,0 +1,384 @@
+:root {
+  --netflix-red: #e50914;
+  --netflix-black: #141414;
+  --netflix-dark-gray: #191919;
+  --netflix-light-gray: #808080;
+  --netflix-white: #ffffff;
+  --transition-speed: 0.3s;
+}
+
+/* General Styles */
+html,
+body {
+  height: 100%; /* Asegura que ocupen toda la pantalla */
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+body {
+  background-color: var(--netflix-black);
+  color: var(--netflix-white);
+  font-family: "Helvetica Neue", Arial, sans-serif;
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Navigation Styles */
+#mainNav {
+  background: var(--netflix-dark-gray);
+  transition: background-color 0.5s ease-in-out;
+  padding: 0.5rem 0;
+}
+
+#mainNav.scrolled {
+  background-color: var(--netflix-black);
+}
+
+.logo-img {
+  height: 40px;
+  width: auto;
+}
+
+#mainNav .navbar-nav .nav-link {
+  color: var(--netflix-white);
+  font-size: 0.9rem;
+  padding: 0.5rem 1rem;
+  transition: color var(--transition-speed);
+}
+
+#mainNav .navbar-nav .nav-link:hover {
+  color: var(--netflix-light-gray);
+}
+
+/* CAMBIO HOY */
+.navbar-toggler {
+  position: relative;
+  z-index: 1051;
+  padding: 0.25rem 0.2rem;
+}
+/* ***** */
+
+.navbar-toggler:focus {
+  border: none;
+  outline: none;
+  box-shadow: none;
+}
+
+.navbar-toggler-icon {
+  filter: invert(100%);
+}
+
+/* Search Form and User Profile - Always Visible */
+.nav-end {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.navbar.menu-open {
+  background-color: var(--netflix-black);
+}
+
+.profile-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem;
+}
+
+.profile-initials {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: var(--netflix-red);
+  color: var(--netflix-white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  /* padding: 0.5rem; */
+}
+
+/* Dropdown Menu */
+.dropdown-menu {
+  display: none;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+  right: 0;
+  left: auto;
+  transform-origin: top right;
+  z-index: 1050;
+}
+
+.profile-wrapper:hover .dropdown-menu {
+  display: block;
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+main {
+  flex: 1;
+}
+
+h2.text-center.mb-4 {
+  margin-top: 5rem; /* Aumenta la separación del título */
+}
+
+/* ----- Contenedor de las Tarjetas ----- */
+#favoritos-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 80px; /* Aumentamos el espacio entre las tarjetas */
+  justify-content: center; /* Centramos las tarjetas */
+  padding: 5px; /* Agregamos margen interno para evitar que las tarjetas queden pegadas a los bordes */
+  max-width: 95%; /* Evita que las tarjetas se extiendan demasiado */
+  margin: auto; /* Centra el contenedor */
+}
+
+/* ----- Estilo de las Tarjetas ----- */
+.movie-card {
+  position: relative;
+  width: 100%; /* Se adapta al tamaño del contenedor */
+  max-width: 280px; /* Aumentamos el tamaño máximo */
+  min-width: 240px; /* Evitamos que sean demasiado pequeñas */
+  height: 400px; /* Ajustamos la altura */
+
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  overflow: hidden;
+  border-radius: 12px;
+  background-color: #222;
+  animation: fadeInUp 0.5s ease-in-out;
+}
+
+/* Animación de aparición */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Animación de Hover: Aumenta el Tamaño */
+.movie-card:hover {
+  transform: scale(1.15);
+  z-index: 10;
+  box-shadow: 0px 10px 20px rgba(255, 255, 255, 0.2);
+}
+
+/* Ocultar el contenido de la tarjeta hasta que se haga hover */
+.card-body {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  color: white;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+}
+
+.card-body .btn {
+  font-size: 1rem;
+  padding: 8px 12px;
+  /* border-radius: 8px;
+  transition: background 0.3s ease-in-out, transform 0.2s ease-in-out; */
+}
+
+/* Iconos dentro de los botones */
+.card-body .btn i {
+  font-size: 1rem;
+}
+
+/* Efecto hover en los botones */
+.card-body .btn:hover {
+  transform: scale(1.1);
+}
+
+/* Mostrar título, botones y género solo en hover */
+.movie-card:hover .card-body {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Ajustar la imagen de la película */
+.movie-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Contenedor de Botones Alineados */
+.movie-actions {
+  display: flex;
+  gap: 10px;
+  width: 100%;
+  justify-content: center;
+}
+/* Botón de eliminar de favoritos (corazón) */
+.fav-btn {
+  background: none;
+  color: white;
+  font-size: 16px;
+  transition: 0.3s ease-in-out;
+  padding: 6px 12px;
+  border-radius: 8px;
+  width: 48%;
+  text-align: center;
+  border: 1px solid white;
+}
+
+/* Cuando el botón está activo (en favoritos) */
+.fav-btn.btn-danger {
+  background: #e50914;
+  color: white;
+  border: none;
+}
+
+.fav-btn.btn-danger:hover {
+  color: white;
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* Botón "Más Información" */
+.more-info-btn {
+  font-size: 16px;
+  padding: 6px 12px;
+  border-radius: 8px;
+  width: 50%; /* Ambos ocupan el mismo ancho */
+  text-align: center;
+  transition: 0.3s ease-in-out;
+  border: 1px solid white; /* Agregamos borde al botón de información */
+}
+
+/* Hover en botón de información */
+.more-info-btn:hover {
+  background: #b20710;
+  transform: scale(1.1);
+}
+
+/* ----- Estilos del Footer ----- */
+footer {
+  background: var(--netflix-black);
+  color: #b3b3b3;
+  font-size: 0.9rem;
+  box-shadow: 0px -5px 10px rgba(255, 255, 255, 0.2);
+  position: relative;
+  z-index: 10;
+  margin-top: 100px;
+}
+
+footer h5 {
+  color: white;
+  font-size: 1.2rem;
+  margin-bottom: 15px;
+}
+
+/* Estilos de los enlaces */
+footer a {
+  color: #b3b3b3;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+footer a:hover {
+  color: white;
+}
+
+/* Redes sociales */
+.social-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  margin: 0 8px;
+  border-radius: 50%;
+  background: #222;
+  color: white;
+  font-size: 20px;
+  transition: background 0.3s ease, transform 0.2s ease;
+  /* transition: transform 0.3s ease, box-shadow 0.3s ease; */
+}
+
+.social-icon:hover {
+  background: #e50914; /* Rojo de Netflix */
+  transform: scale(1.1);
+  box-shadow: 0px 0px 15px rgba(229, 9, 20, 0.5);
+}
+
+/* Responsive Styles */
+@media (max-width: 1200px) {
+  .movie-card {
+    max-width: 190px;
+    height: 300px;
+  }
+}
+
+@media (max-width: 992px) {
+  .nav-end {
+    gap: 0.3rem;
+    position: absolute;
+    right: 1.25rem;
+    top: 0.625rem;
+  }
+
+  #favoritos-container {
+    justify-content: center;
+  }
+
+  .movie-card {
+    min-width: 200px;
+    max-width: 220px;
+  }
+}
+
+@media (max-width: 768px) {
+  .navbar-nav {
+    text-align: center;
+  }
+
+  .navbar-toggler {
+    margin-left: auto;
+  }
+
+  .movie-card {
+    min-width: 180px;
+    max-width: 200px;
+  }
+}
+
+@media (max-width: 576px) {
+  .movie-card {
+    min-width: 160px;
+    max-width: 180px;
+  }
+}
+
+@media (max-width: 400px) {
+  .movie-card {
+    min-width: 140px;
+    max-width: 160px;
+  }
+}

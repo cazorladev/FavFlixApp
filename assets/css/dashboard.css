@@ -52,7 +52,14 @@ body {
   color: var(--netflix-light-gray);
 }
 
-/* Eliminar el borde cuando el botón está enfocado (al hacer clic) */
+/* CAMBIO HOY */
+.navbar-toggler {
+  position: relative;
+  z-index: 1051;
+  padding: 0.25rem 0.2rem;
+}
+/* ***** */
+
 .navbar-toggler:focus {
   border: none;
   outline: none;
@@ -113,7 +120,8 @@ body {
   background-color: var(--netflix-dark-gray);
   color: var(--netflix-white);
   padding: 0.5rem;
-  min-width: 250px;
+  min-width: 180px;
+  max-width: 200px;
   opacity: 0;
   border: none;
   transition: width 0.4s ease-in-out, opacity 0.4s ease-in-out;
@@ -136,7 +144,7 @@ body {
 }
 
 .search-wrapper.active .search-input {
-  width: 300px !important; /* Hace que la barra de búsqueda sea más grande al expandirse */
+  width: 220px !important; /* Hace que la barra de búsqueda sea más grande al expandirse */
   opacity: 1;
   padding: 0.5rem 1rem;
 }
@@ -181,6 +189,14 @@ body {
   transform: scale(1.05);
   cursor: pointer;
 }
+
+/* #resultados-busqueda {
+  display: none;
+}
+
+.resultados-container {
+  display: none;
+} */
 
 .profile-btn {
   display: flex;
@@ -346,8 +362,45 @@ button:hover,
 }
 
 .peliculas {
-  padding: 10px 0;
+  display: flex;
+  gap: 15px;
+  padding: 10px;
+  /* overflow: visible !important; */
+  position: relative; /* Asegura que los hijos puedan expandirse */
 }
+
+.peliculas .card {
+  width: 180px; /* Ajusta el ancho de la tarjeta */
+  height: 350px; /* Define una altura fija */
+  overflow: hidden; /* Evita desbordamientos */
+  transition: transform 0.3s ease-in-out;
+}
+
+/* Ajustar la imagen dentro de la tarjeta */
+.peliculas .card img {
+  width: 100%;
+  height: 100%; /* Ajusta la altura de la imagen */
+  object-fit: cover; /* Evita deformaciones */
+}
+
+/* Mantener el efecto hover */
+.peliculas .card:hover {
+  transform: scale(1.05);
+}
+
+/* Ajuste específico para los resultados de búsqueda */
+#resultados-busqueda .card {
+  width: 180px; /* Mantiene el mismo tamaño que las demás tarjetas */
+  height: 350px;
+}
+
+/* Ajustar la imagen dentro de las tarjetas de resultados de búsqueda */
+#resultados-busqueda .card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
 
 .peliculas::-webkit-scrollbar {
   height: 5px;
@@ -362,15 +415,16 @@ button:hover,
   background: #555;
 }
 
+/* CAMBIO HOY */
 .card {
   position: relative;
-  min-width: 200px;
-  max-width: 250px;
+  min-width: 220px; /* Antes: 200px */
+  max-width: 260px; /* Antes: 250px */
   flex: 0 0 auto;
-  margin-right: 10px;
+  margin-right: 15px; /* Antes: 10px */
   transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
   overflow: hidden;
-  border-radius: 10px;
+  border-radius: 12px; /* Antes: 10px */
   background-color: #222;
   animation: fadeInUp 0.5s ease-in-out;
 }
@@ -387,10 +441,16 @@ button:hover,
 }
 
 /* Evita que todas se expandan, solo afecta a la tarjeta en hover */
-.card:hover {
+/* .card:hover {
   transform: scale(1.2);
   z-index: 15;
-  box-shadow: 0px 8px 16px rgba(255, 255, 255, 0.2); /* Sombra para destacar */
+  box-shadow: 0px 8px 16px rgba(255, 255, 255, 0.2);
+} */
+
+.card:hover {
+  transform: scale(1.15);
+  z-index: 10;
+  box-shadow: 0px 10px 20px rgba(255, 255, 255, 0.2);
 }
 
 /* Ocultar el contenido adicional hasta que se haga hover */
@@ -405,6 +465,25 @@ button:hover,
   transform: translateY(30px);
   transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
 }
+
+.card-body .btn {
+  font-size: 1.2rem; /* Antes: más pequeño */
+  padding: 8px 12px;
+  border-radius: 8px;
+  transition: background 0.3s ease-in-out, transform 0.2s ease-in-out;
+}
+
+/* Aumentar tamaño de los íconos */
+.card-body .btn i {
+  font-size: 1rem;
+}
+
+/* Efecto hover */
+.card-body .btn:hover {
+  transform: scale(1.1);
+}
+
+/* ***** */
 
 /* Solo se muestra cuando se hace hover sobre la tarjeta */
 .card:hover .card-body {
@@ -430,15 +509,66 @@ button:hover,
   content: ""; /* Elimina el punto del primer elemento */
 }
 
-/* Botones */
 .btn-outline-secondary {
   border-radius: 30%;
+}
+
+
+
+/* ----- Estilos del Footer ----- */
+footer {
+  background: var(--netflix-black);
+  color: #b3b3b3;
+  font-size: 0.9rem;
+  box-shadow: 0px -5px 10px rgba(255, 255, 255, 0.2);
+  position: relative;
+  z-index: 10;
+  margin-top: 100px;
+}
+
+footer h5 {
+  color: white;
+  font-size: 1.2rem;
+  margin-bottom: 15px;
+}
+
+/* Estilos de los enlaces */
+footer a {
+  color: #b3b3b3;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+footer a:hover {
+  color: white;
+}
+
+/* Redes sociales */
+.social-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  margin: 0 8px;
+  border-radius: 50%;
+  background: #222;
+  color: white;
+  font-size: 20px;
+  transition: background 0.3s ease, transform 0.2s ease;
+  /* transition: transform 0.3s ease, box-shadow 0.3s ease; */
+}
+
+.social-icon:hover {
+  background: #e50914; /* Rojo de Netflix */
+  transform: scale(1.1);
+  box-shadow: 0px 0px 15px rgba(229, 9, 20, 0.5);
 }
 
 /* Responsive Styles */
 @media (max-width: 1200px) {
   .trend-item {
-    min-width: 160px; /* Reduce el tamaño de las tarjetas */
+    min-width: 160px;
     height: 240px;
   }
 }
@@ -453,12 +583,10 @@ button:hover,
 
   .hero-title {
     font-size: 2rem;
-    /* max-height: 80%; */
   }
 
   .hero-description {
-    font-size: 1.1rem;
-    /* max-width: 80%;  */
+    font-size: 1rem;
   }
 
   .hero-content {
@@ -466,14 +594,26 @@ button:hover,
   }
 
   .age-rating {
-    font-size: 1rem; /* Ajusta el tamaño de la fuente en pantallas más pequeñas */
+    font-size: 1rem;
   }
-
 }
 
 @media (max-width: 768px) {
+  .navbar-nav {
+    text-align: center;
+  }
+
+  .navbar-toggler {
+    margin-left: auto;
+  }
+
+  /* .nav-end {
+    position: static;
+    margin-top: 10px;
+  } */
+
   .hero-title {
-    font-size: 2.5rem;
+    font-size: 2rem;
   }
 
   .hero-content {
@@ -485,23 +625,33 @@ button:hover,
   }
 }
 
+@media (max-width: 576px) {
+  .card {
+    min-width: 140px;
+    max-width: 160px;
+  }
+
+  .modal-dialog {
+    max-width: 90vw;
+  }
+}
+
 @media (max-width: 480px) {
-  /* .trend-group {
-    gap: 10px;
-  } */
+  .hero-title {
+    font-size: 1.8rem;
+  }
 
-  
+  .hero-description {
+    font-size: 0.9rem;
+  }
+
+  .search-input {
+    width: 100%;
+    max-width: none;
+  }
+
+  .peliculas {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
 }
-
-.modal-body {
-  background-color: black;
-}
-
-.modal-header {
-  background-color: black;
-}
-
-.modal-footer {
-  background-color: black;
-}
-

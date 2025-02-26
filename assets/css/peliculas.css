@@ -1,0 +1,44 @@
+body {
+  background-color: #141414;
+  color: #ffffff;
+  font-family: 'Poppins', sans-serif;
+}
+
+.container {
+  animation: fadeIn 1s ease-in-out;
+}
+
+h1 {
+  font-size: 2rem;
+  color: #e50914;
+}
+
+p {
+  font-size: 1.2rem;
+  color: #b3b3b3;
+}
+
+.btn-danger {
+  background-color: #e50914;
+  border: none;
+  padding: 10px 20px;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+.btn-danger:hover {
+  background-color: #b20710;
+  transform: scale(1.05);
+}
+
+/* Animación de entrada */
+@keyframes fadeIn {
+  from {
+      opacity: 0;
+      transform: translateY(-20px);
+  }
+  to {
+      opacity: 1;
+      transform: translateY(0);
+  }
+}
