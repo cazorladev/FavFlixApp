@@ -1,11 +1,12 @@
-/* Variables de color */
+/* ==========================
+   VARIABLES Y CONFIGURACIÓN GLOBAL
+   ========================== */
 :root {
   --netflix-red: #e50914;
   --netflix-red-hover: #f40612;
   --netflix-black: #141414;
 }
 
-/* Reset y configuración global */
 * {
   margin: 0;
   padding: 0;
@@ -19,6 +20,9 @@ body {
   text-align: center;
 }
 
+/* ==========================
+   NAVBAR (Barra de navegación)
+   ========================== */
 .navbar {
   position: absolute;
   width: 100%;
@@ -38,6 +42,9 @@ body {
   transform: scale(1.1);
 }
 
+/* ==========================
+   BOTONES GENERALES
+   ========================== */
 .btn-danger {
   background-color: var(--netflix-red);
   border-radius: 5px;
@@ -49,12 +56,14 @@ body {
   transform: scale(1.05);
 }
 
-/* Hero Section */
+/* ==========================
+   HERO SECTION (Sección principal)
+   ========================== */
 .hero {
   background-image: url("/assets/img/favflix-background.jpg");
   background-size: cover;
   background-position: center;
-  height: 95vh;
+  height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -64,21 +73,19 @@ body {
 .hero::before {
   content: "";
   position: absolute;
-  top: 0;
-  left: 0;
   width: 100%;
   height: 100%;
   background: linear-gradient(
     to bottom,
     rgba(0, 0, 0, 0.9) 10%,
-    /* Más oscuro en la parte superior */ rgba(0, 0, 0, 0.5) 50%,
-    /* Centro más claro */ rgba(0, 0, 0, 0.9) 90%
-  ); /* Más oscuro en la parte inferior */
+    rgba(0, 0, 0, 0.5) 50%,
+    rgba(0, 0, 0, 0.9) 90%
+  );
   z-index: 0;
 }
 
 .hero .container {
-  position: relative;
+  /* position: relative; */
   z-index: 1;
 }
 
@@ -88,10 +95,9 @@ body {
   text-shadow: 2px 2px 15px rgba(0, 0, 0, 0.8);
 }
 
-/* Estilos solo para el botón "Registrar Ahora" */
 .hero .btn-danger {
-  padding: 15px 35px; /* Botón más grande */
-  font-size: 1.5rem; /* Texto más grande */
+  padding: 15px 35px;
+  font-size: 1.5rem;
   font-weight: bold;
   box-shadow: 0px 0px 15px rgba(229, 9, 20, 0.7);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -102,7 +108,9 @@ body {
   box-shadow: 0px 0px 25px rgba(229, 9, 20, 1);
 }
 
-/* Trending Section */
+/* ==========================
+   CARRUSEL DE TENDENCIAS
+   ========================== */
 .trending {
   text-align: center;
   padding-left: 0;
@@ -159,7 +167,6 @@ body {
   text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.7);
 }
 
-/* Personalizar los botones del carrusel */
 .carousel-inner img {
   max-height: 400px;
   object-fit: cover;
@@ -169,31 +176,30 @@ body {
 .carousel-control-next {
   width: 60px;
   height: 60px;
-  background: rgba(0, 0, 0, 0.7); /* Fondo oscuro translúcido */
-  border-radius: 50%; /* Hace que sean botones circulares */
+  background: rgba(0, 0, 0, 0.7);
+  border-radius: 50%;
   transition: background 0.3s ease, transform 0.3s ease;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-/* Efecto hover */
 .carousel-control-prev:hover,
 .carousel-control-next:hover {
   background: var(--netflix-red); /* Rojo de Netflix */
   transform: scale(1.1);
 }
 
-/* Personalizar las flechas */
 .carousel-control-prev-icon,
 .carousel-control-next-icon {
   width: 30px;
   height: 30px;
-  /* filter: invert(1); */
   background-size: contain;
 }
 
-/* Estilos para feature */
+/* ==========================
+   CARRUSEL DE FEATURE
+   ========================== */
 .feature-card {
   transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
 }
@@ -216,17 +222,18 @@ body {
   color: white !important; /* Ahora es blanco */
 }
 
-/* Estilos para el modal */
+/* ==========================
+   MODAL DE PELÍCULAS
+   ========================== */
 .modal-dialog {
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 100vh; /* Asegura que esté centrado verticalmente */
+  min-height: 100vh;
   max-width: 900px;
   margin: auto;
 }
 
-/* ----- Ajustar tamaño del modal ----- */
 .modal-content {
   border-radius: 12px;
   overflow: hidden;
@@ -238,7 +245,7 @@ body {
 /* Imagen del modal */
 .modal-banner {
   width: 100%;
-  height: 300px; /* Ajusta la altura de la imagen */
+  height: 300px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -276,7 +283,6 @@ body {
   margin-bottom: 20px;
 }
 
-/* Botón dentro del modal */
 .btn-netflix {
   background-color: #e50914;
   color: white;
@@ -310,21 +316,15 @@ body {
   transform: scale(1.1);
 }
 
-/* ----- Estilos del Footer ----- */
+/* ==========================
+   FOOTER (Pie de página)
+   ========================== */
 footer {
   background: var(--netflix-black);
   color: #b3b3b3;
   font-size: 0.9rem;
-  /* position: relative; */
   padding-top: 20px;
   box-shadow: 0px -5px 10px rgba(255, 255, 255, 0.2);
-  /* border-top: 3px solid var(--netflix-red); */
-}
-
-footer h5 {
-  color: white;
-  font-size: 1.2rem;
-  margin-bottom: 15px;
 }
 
 /* Estilos de los enlaces */
@@ -351,7 +351,6 @@ footer a:hover {
   color: white;
   font-size: 20px;
   transition: background 0.3s ease, transform 0.2s ease;
-  /* transition: transform 0.3s ease, box-shadow 0.3s ease; */
 }
 
 .social-icon:hover {
@@ -360,17 +359,44 @@ footer a:hover {
   box-shadow: 0px 0px 15px rgba(229, 9, 20, 0.5);
 }
 
-/* Responsivo */
+/* ==========================
+   RESPONSIVE DESIGN (Adaptación a móviles)
+   ========================== */
 @media (max-width: 768px) {
   .hero {
-    height: 75vh; /* Reducir altura en móviles */
+    height: 100vh;
+    padding: 40px 20px;
+    text-align: center;
+  }
+
+  .hero h1 {
+    font-size: 1.8rem;
+  }
+
+  .hero p {
+    font-size: 1rem; /* Reduce el tamaño del texto descriptivo */
+  }
+
+  .trend-group {
+    gap: 25px;
+    overflow-x: scroll;
+  }
+
+  .trend-item {
+    min-width: 150px;
+    height: 220px;
   }
 
   .carousel-inner img {
-    max-height: 250px;
+    max-height: 300px;
   }
 
   .social-icon {
     margin: 5px;
+  }
+
+  footer .row {
+    flex-direction: column;
+    text-align: center;
   }
 }

@@ -1,12 +1,21 @@
+/**
+ * Espera a que el DOM esté completamente cargado antes de ejecutar el código.
+ */
 document.addEventListener("DOMContentLoaded", init);
 
+/**
+ * Inicializa la página cargando el perfil del usuario,
+ * mostrando las películas favoritas y configurando el botón de cierre de sesión.
+ */
 function init() {
   manejarPerfilUsuario();
   mostrarPeliculasFavoritas();
   configurarLogout();
 }
 
-// Maneja la visualización del perfil del usuario
+/**
+ * Obtiene el usuario autenticado y muestra la inicial en el perfil.
+ */
 function manejarPerfilUsuario() {
   const usuario = JSON.parse(localStorage.getItem("loggedUser"));
   const userInitialsElement = document.querySelector(".profile-initials");
@@ -18,7 +27,11 @@ function manejarPerfilUsuario() {
   }
 }
 
-// Muestra las películas favoritas del usuario
+/**
+ * Muestra las películas favoritas almacenadas en localStorage.
+ * Si no hay películas, muestra un mensaje informativo.
+ * @param {Array} favoritos - Lista de películas favoritas obtenidas del localStorage.
+ */
 function mostrarPeliculasFavoritas() {
   const usuario = JSON.parse(localStorage.getItem("loggedUser"));
   const contenedorFavoritos = document.getElementById("favoritos-container");
@@ -64,6 +77,7 @@ function mostrarPeliculasFavoritas() {
     const buttonsContainer = document.createElement("div");
     buttonsContainer.classList.add("movie-actions");
 
+    // Botón para eliminar de favoritos
     const favButton = document.createElement("button");
     favButton.type = "button";
     favButton.classList.add("btn", "fav-btn", "btn-danger");
@@ -77,6 +91,7 @@ function mostrarPeliculasFavoritas() {
       );
     });
 
+    // Botón para ver más información de la película
     const infoButton = document.createElement("button");
     infoButton.type = "button";
     infoButton.classList.add("btn", "btn-outline-secondary", "info-btn");
@@ -98,7 +113,9 @@ function mostrarPeliculasFavoritas() {
   });
 }
 
-// Configura el botón de cierre de sesión
+/**
+ * Configura el botón de cierre de sesión eliminando los datos del usuario.
+ */
 function configurarLogout() {
   const logoutButton = document.getElementById("logout");
 
@@ -110,9 +127,12 @@ function configurarLogout() {
   }
 }
 
-// Carga la información detallada de una película
+/**
+ * Carga la información detallada de una película desde la API.
+ * @param {number} movieId - ID de la película a cargar.
+ */
 function cargarInformacionPelicula(movieId) {
-  const API_KEY = "TU_API_KEY_AQUI"; // NO DEJES LA API KEY EXPUESTA
+  const API_KEY = "7154c887e726b37b3d012f91ada2bf12";
 
   fetch(
     `https://api.themoviedb.org/3/movie/${movieId}?api_key=${API_KEY}&language=es-ES&append_to_response=videos`
@@ -139,7 +159,11 @@ function cargarInformacionPelicula(movieId) {
     .catch((error) => console.error("Error al cargar la película:", error));
 }
 
-// Elimina una película de favoritos sin recargar la página
+/**
+ * Elimina una película de la lista de favoritos sin recargar la página.
+ * @param {number} movieId - ID de la película a eliminar.
+ * @param {HTMLElement} cardElement - Elemento de la tarjeta en el DOM.
+ */
 function eliminarDeFavoritos(movieId, cardElement) {
   const usuario = JSON.parse(localStorage.getItem("loggedUser"));
   if (!usuario) return;

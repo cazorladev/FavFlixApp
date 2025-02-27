@@ -4,144 +4,66 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>FavFlixTEMP</title>
-    <meta
-      name="description"
-      content="FavFlix te permite guardar, organizar y compartir tus películas favoritas en un solo lugar."
-    />
-    <meta name="author" content="FavFlix - Grupo 1" />
-    <meta name="robots" content="index, follow" />
 
-    <!-- Favicon -->
-    <link rel="icon" href="../assets/img/favicon.ico" type="image/x-icon" />
+    <!-- Información para SEO y accesibilidad -->
+    <title>FavFlix: Tu plataforma de películas favorita</title>
+    <meta name="description" content="FavFlix te permite guardar, organizar y compartir tus películas favoritas en un solo lugar.">
+    <meta name="author" content="FavFlix - Grupo 1">
+    <meta name="robots" content="index, follow">
+    <link rel="icon" href="./assets/img/favicon.ico" type="image/x-icon">
 
-    <!-- Bootstrap CSS -->
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-    />
-
-    <!-- Bootstrap Icons -->
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
-    />
-
-    <!-- Custom CSS -->
+    <!-- Enlaces a hojas de estilo -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"/>
     <link rel="stylesheet" href="../assets/css/dashboard.css" />
-
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
-    />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"/>
   </head>
+
   <body>
-    <!-- Header Section -->
+    <!-- Sección del encabezado -->
     <header>
-      <!-- Main Navigation -->
+      <!-- Barra de navegación principal -->
       <nav class="navbar navbar-expand-lg fixed-top" id="mainNav">
         <div class="container-fluid px-4">
           <div class="d-flex align-items-center">
             <a class="navbar-brand me-0" href="./dashboard.html">
-              <!-- CAMBIO HOY-->
-              <img
-                src="../assets/img/Logo-FavFlix.png"
-                alt="FavFlix Logo"
-                class="logo-img"
-              />
+              <img src="../assets/img/Logo-FavFlix.png" alt="FavFlix Logo" class="logo-img"/>
             </a>
-            <button
-              class="navbar-toggler"
-              type="button"
-              data-bs-toggle="collapse"
-              data-bs-target="#navbarContent"
-              aria-controls="navbarContent"
-              aria-expanded="false"
-              aria-label="Toggle navigation"
-            >
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
               <span class="navbar-toggler-icon"></span>
             </button>
           </div>
 
-          <!-- Navigation Content -->
+          <!-- Contenido de la navegación -->
           <div class="collapse navbar-collapse" id="navbarContent">
-            <!-- Primary Navigation -->
             <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
-              <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#"
-                  >Inicio</a
-                >
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="../pages/peliculas.html">Peliculas</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="../pages/misFavoritos.html"
-                  >Mis Favoritos</a
-                >
-              </li>
+              <li class="nav-item"><a class="nav-link active" aria-current="page" href="#">Inicio</a></li>
+              <li class="nav-item"><a class="nav-link" href="../pages/peliculas.html">Peliculas</a></li>
+              <li class="nav-item"><a class="nav-link" href="../pages/misFavoritos.html">Mis Favoritos</a></li>
             </ul>
           </div>
 
-          <!-- Search Form and User Profile OUTSIDE the menu -->
+          <!-- Barra de búsqueda y perfil de usuario -->
           <div class="nav-end d-flex align-items-center">
-            <!-- Search Form -->
+            <!-- Formulario de búsqueda -->
             <form class="search-form" role="search" id="searchForm">
               <div class="search-wrapper">
-                <button class="search-toggle" type="button">
-                  <i class="bi bi-search"></i>
-                </button>
-                <input
-                  class="search-input"
-                  type="search"
-                  placeholder="Título, género, actor"
-                  aria-label="Search"
-                  id="searchInput"
-                  required
-                />
+                <button class="search-toggle" type="button"><i class="bi bi-search"></i></button>
+                <input class="search-input" type="search" placeholder="Título, género, actor" aria-label="Search" id="searchInput" required/>
                 <div class="search-results"></div>
               </div>
             </form>
 
-            <!-- User Profile -->
+            <!-- Menú desplegable de perfil de usuario -->
             <div class="dropdown profile-wrapper">
-              <button
-                class="btn profile-btn"
-                type="button"
-                id="profileDropdown"
-                data-bs-toggle="dropdown"
-                aria-expanded="false"
-                aria-haspopup="true"
-                aria-controls="profileMenu"
-              >
+              <button class="btn profile-btn" type="button" id="profileDropdown" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true" aria-controls="profileMenu">
                 <div class="profile-initials">?</div>
               </button>
-              <ul
-                class="dropdown-menu dropdown-menu-end"
-                id="profileMenu"
-                aria-labelledby="profileDropdown"
-                role="menu"
-              >
-                <li role="none">
-                  <!-- Indica que este elemento no tiene un rol específico -->
-                  <a class="dropdown-item" href="#" role="menuitem">
-                    <!-- Indica que este es un ítem del menú -->
-                    <i class="bi bi-person"></i> Ver Perfil
-                  </a>
-                </li>
-                <li role="none">
-                  <a class="dropdown-item" href="#" role="menuitem">
-                    <i class="bi bi-gear"></i> Configuración
-                  </a>
-                </li>
-                <li role="none">
-                  <hr class="dropdown-divider" />
-                </li>
-                <li role="none">
-                  <a class="dropdown-item" href="#" id="logout" role="menuitem">
-                    <i class="bi bi-box-arrow-right"></i> Cerrar Sesión
-                  </a>
-                </li>
+              <ul class="dropdown-menu dropdown-menu-end" id="profileMenu" aria-labelledby="profileDropdown" role="menu">
+                <li role="none"><a class="dropdown-item" href="#" role="menuitem"><i class="bi bi-person"></i> Ver Perfil</a></li>
+                <li role="none"><a class="dropdown-item" href="#" role="menuitem"><i class="bi bi-gear"></i> Configuración</a></li>
+                <li role="none"><hr class="dropdown-divider" /></li>
+                <li role="none"><a class="dropdown-item" href="#" id="logout" role="menuitem"><i class="bi bi-box-arrow-right"></i> Cerrar Sesión</a></li>
               </ul>
             </div>
           </div>
@@ -149,9 +71,9 @@
       </nav>
     </header>
 
-    <!-- Main Content -->
+    <!-- Sección principal -->
     <main>
-      <!-- Hero Section -->
+      <!-- Sección destacada -->
       <section class="hero-section">
         <div class="hero-content">
           <div class="container-fluid px-4">
@@ -160,9 +82,7 @@
                 <h1 class="hero-title"></h1>
                 <p class="hero-description"></p>
                 <div class="hero-actions">
-                  <button class="btn btn-secondary btn-lg info-btn">
-                    <i class="bi bi-info-circle"></i> Más información
-                  </button>
+                  <button class="btn btn-secondary btn-lg info-btn"><i class="bi bi-info-circle"></i> Más información</button>
                 </div>
               </div>
             </div>
@@ -173,6 +93,7 @@
         <div class="hero-fade"></div>
       </section>
 
+      <!-- Catálogo de películas -->
       <section class="Catalogo-peliculas">
         <h5 class="my-3">Películas Populares</h5>
         <div class="peliculas d-flex overflow-x-auto" id="populares"></div>
@@ -187,58 +108,30 @@
       </section>
       <section class="Catalogo-peliculas resultados-container">
         <h5 class="my-3">Resultados de búsqueda</h5>
-        <div
-          class="peliculas d-flex overflow-x-auto"
-          id="resultados-busqueda"
-        ></div>
+        <div class="peliculas d-flex overflow-x-auto" id="resultados-busqueda"></div>
       </section>
 
-      <!-- Modal de Película -->
-      <div
-        class="modal fade"
-        id="movieModal"
-        tabindex="-1"
-        aria-labelledby="movieModalLabel"
-        aria-hidden="true"
-      >
+      <!-- Modal de información de película -->
+      <div class="modal fade" id="movieModal" tabindex="-1" aria-labelledby="movieModalLabel" aria-hidden="true">
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header bg-black">
               <h5 class="modal-title" id="movieTitle"></h5>
-              <!-- <button
-                type="button"
-                class="btn-close"
-                data-bs-dismiss="modal"
-                aria-label="Close"
-              ></button> -->
             </div>
             <div class="modal-body text-center bg-black">
-              <img
-                id="movieImage"
-                src=""
-                class="img-fluid mb-3"
-                alt="Movie Poster"
-              />
+              <img id="movieImage" src="" class="img-fluid mb-3" alt="Movie Poster"/>
               <p id="movieDescription"></p>
               <p><strong>Año:</strong> <span id="movieYear"></span></p>
               <p><strong>Género:</strong> <span id="movieGenre"></span></p>
             </div>
             <div class="modal-footer bg-black">
-              <!-- <button id="favoriteButton" class="btn btn-danger"></button> -->
-              <!-- <button
-                type="button"
-                class="btn btn-secondary"
-                data-bs-dismiss="modal"
-              >
-                Cerrar
-              </button> -->
             </div>
           </div>
         </div>
       </div>
     </main>
 
-    <!-- Footer -->
+    <!-- Pie de página -->
     <footer class="bg-black text-light py-4">
       <div class="container">
         <div class="row text-center text-md-start">
@@ -246,34 +139,10 @@
           <div class="col-md-4 mb-3">
             <h5>Síguenos en</h5>
             <div class="d-flex justify-content-center justify-content-md-start">
-              <a
-                href="https://www.facebook.com"
-                target="_blank"
-                class="social-icon"
-              >
-                <i class="fab fa-facebook-f"></i>
-              </a>
-              <a
-                href="https://www.twitter.com"
-                target="_blank"
-                class="social-icon"
-              >
-                <i class="fab fa-twitter"></i>
-              </a>
-              <a
-                href="https://www.instagram.com"
-                target="_blank"
-                class="social-icon"
-              >
-                <i class="fab fa-instagram"></i>
-              </a>
-              <a
-                href="https://www.youtube.com"
-                target="_blank"
-                class="social-icon"
-              >
-                <i class="fab fa-youtube"></i>
-              </a>
+              <a href="https://www.facebook.com" target="_blank" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+              <a href="https://www.twitter.com"  target="_blank" class="social-icon"><i class="fab fa-twitter"></i></a>
+              <a href="https://www.instagram.com" target="_blank" class="social-icon"><i class="fab fa-instagram"></i></a>
+              <a href="https://www.youtube.com" target="_blank" class="social-icon"><i class="fab fa-youtube"></i></a>
             </div>
           </div>
 
@@ -296,11 +165,8 @@
       </div>
     </footer>
 
-    <!-- Bootstrap JS -->
+    <!-- Enlaces a scripts -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-
-    <!-- Custom JS -->
     <script src="../assets/js/dashboard.js"></script>
-    <!-- <script src="../assets/js/dashboardCatalogo.js"></script> -->
   </body>
 </html>
