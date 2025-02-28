@@ -2,6 +2,7 @@
  * Espera a que el DOM esté completamente cargado antes de ejecutar el código.
  */
 document.addEventListener("DOMContentLoaded", async function () {
+  /** Oculta la sección de resultados de búsqueda al cargar la página */
   document.querySelector(".resultados-container").style.display = "none";
 
   /**
@@ -15,17 +16,21 @@ document.addEventListener("DOMContentLoaded", async function () {
     console.error("Error al acceder a localStorage:", error);
   }
 
+  /** Redirige al usuario si no hay sesión activa */
   if (!userData) {
     window.location.href = "../index.html"; // Redirige si no hay datos de usuario
     return;
   }
 
-  /**
-   * Tiempo de inactividad en milisegundos (10 minutos).
-   * @constant {number}
-   */
+  // =============================
+  // CONFIGURACIÓN DE INACTIVIDAD Y SESIÓN
+  // =============================
+
+  /** Tiempo de inactividad permitido antes de cerrar sesión (en milisegundos) */
   const INACTIVITY_TIME = 1 * 60 * 1000;
-  let inactivityTimer;
+
+  /** Variable para almacenar el temporizador de inactividad */
+  let inactivityTimer; 
 
   /**
    * Cierra la sesión del usuario por inactividad.
@@ -43,22 +48,31 @@ document.addEventListener("DOMContentLoaded", async function () {
     inactivityTimer = setTimeout(logoutUser, INACTIVITY_TIME);
   }
 
-  // Detectar actividad del usuario y reiniciar el temporizador
+  /** Detectar actividad del usuario y reiniciar el temporizador */
   ["mousemove", "keypress", "click", "scroll", "touchstart"].forEach(event => {
     document.addEventListener(event, resetInactivityTimer);
   });
 
-  // Iniciar el temporizador al cargar la página
+  /** Iniciar el temporizador al cargar la página */
   resetInactivityTimer();
+
+  // =============================
+  // MOSTRAR INICIAL DEL USUARIO EN EL PERFIL
+  // =============================
 
   /**
    * Extrae la inicial del nombre de usuario y la muestra en el perfil.
+   * @param {Object} userData - Datos del usuario autenticado.
    */
   const initials = userData.username ? userData.username.charAt(0).toUpperCase() : "";
   const userInitialsElement = document.querySelector(".profile-initials");
   if (userInitialsElement) userInitialsElement.textContent = initials;
 
-  // Configuración del botón de cerrar sesión
+  // =============================
+  // CONFIGURACIÓN DEL BOTÓN DE CIERRE DE SESIÓN
+  // =============================
+  
+  /** Obtiene el botón de cierre de sesión */
   const logoutButton = document.querySelector("#logout");
   if (logoutButton) {
     logoutButton.addEventListener("click", () => {
@@ -67,18 +81,18 @@ document.addEventListener("DOMContentLoaded", async function () {
     });
   }
 
-  // Configuración de la API de películas
+  /** Clave de API y URL base para obtener datos de películas desde TMDB */
   const API_KEY = "7154c887e726b37b3d012f91ada2bf12";
   const API_BASE_URL = "https://api.themoviedb.org/3";
 
-  // URLs para obtener películas
+  /** URLs para obtener películas de diferentes categorías */
   const urls = {
     populares: `${API_BASE_URL}/movie/popular?api_key=${API_KEY}&language=es-ES&page=1`,
     estrenos: `${API_BASE_URL}/movie/now_playing?api_key=${API_KEY}&language=es-ES&page=1`,
     vistas: `${API_BASE_URL}/movie/top_rated?api_key=${API_KEY}&language=es-ES&page=1`,
   };
 
-  // Selección de elementos del DOM
+  /** Elementos del DOM seleccionados */
   const heroTitle = document.querySelector(".hero-title");
   const heroDescription = document.querySelector(".hero-description");
   const ageRating = document.querySelector(".age-rating");
@@ -92,30 +106,38 @@ document.addEventListener("DOMContentLoaded", async function () {
   const searchResultsContainer = document.getElementById("resultados-busqueda");
   const searchResults = document.querySelector(".search-results");
 
-  /**
-   * Obtiene y almacena los géneros de películas en un objeto.
-   * @returns {Promise<Object>} - Un objeto con los IDs de género como claves y nombres como valores.
-   */
+  /** @type {Object} - Almacena los géneros de películas con sus IDs */
   let generosMap = {};
+
+  /** 
+   * Obtiene la lista de géneros de películas desde la API y los almacena en `generosMap`. 
+   * Se usa `fetch` para hacer la petición y los datos se procesan en formato JSON. 
+   */
   await fetch(
     `${API_BASE_URL}/genre/movie/list?api_key=${API_KEY}&language=es-ES`
   )
-    .then((response) => response.json())
+    .then((response) => response.json()) // Convierte la respuesta en JSON
     .then((data) => {
+      // Almacena los géneros en el objeto `generosMap` con ID como clave y nombre como valor
       data.genres.forEach((genre) => {
         generosMap[genre.id] = genre.name;
       });
     })
-    .catch((error) => console.error("Error al obtener géneros:", error));
+    .catch((error) => console.error("Error al obtener géneros:", error)); // Manejo de errores en la petición
 
-   /**
-   * Obtiene la clasificación por edades de una película basada en certificaciones.
-   * @param {Array<Object>} certifications - Lista de certificaciones de edad por país.
-   * @returns {string} - Clasificación de edad en formato legible.
-   */
+  /**
+  * Obtiene la clasificación por edades de una película basada en certificaciones.
+  * @param {Array<Object>} certifications - Lista de certificaciones de edad por país.
+  * @returns {string} - Clasificación de edad en formato legible.
+  */
   function getAgeRating(certifications) {
+    // Filtra las certificaciones para encontrar las de EE.UU.
     const usCertifications = certifications.find((cert) => cert.iso_3166_1 === "US")?.release_dates || [];
+
+    // Obtiene la clasificación de la primera certificación encontrada    
     const usRating = usCertifications[0]?.certification || "";
+
+    // Mapeo de clasificaciones de EE.UU. a etiquetas más comprensibles
     const ratingMap = {
       G: "Todos",
       "TV-Y": "Todos",
@@ -129,11 +151,14 @@ document.addEventListener("DOMContentLoaded", async function () {
       "NC-17": "18+",
       "TV-MA": "18+",
     };
+
+    // Retorna la clasificación traducida o "Desconocido" si no hay coincidencia
     return ratingMap[usRating] || "Desconocido";
   }
 
   /**
    * Agrega o quita la clase 'scrolled' al navbar según el desplazamiento de la página.
+   * Esto se usa para cambiar el estilo del navbar cuando el usuario hace scroll.
    */
   if (navbar) {
     window.addEventListener("scroll", () => {
@@ -142,71 +167,94 @@ document.addEventListener("DOMContentLoaded", async function () {
   }
 
   /**
-   * Obtiene y muestra una película en tendencia en el Hero Section.
+   * Obtiene y muestra una película en tendencia en la Hero Section.
+   * La película se elige aleatoriamente de las tendencias semanales.
    */
   async function fetchTrendingMovie() {
     try {
+      // Realiza la petición para obtener películas en tendencia de la semana
       const response = await fetch(`${API_BASE_URL}/trending/movie/week?api_key=${API_KEY}&language=es-ES`);
       const data = await response.json();
+
+      // Filtra las películas que tienen descripción e imagen de fondo
       let validMovies = data.results.filter((movie) => movie.overview && movie.backdrop_path);
+
+      // Mezcla aleatoriamente las películas y selecciona una
       validMovies.sort(() => Math.random() - 0.5);
       const movie = validMovies[0];
+
+      // Obtiene la clasificación por edad de la película
       const certificationResponse = await fetch(`${API_BASE_URL}/movie/${movie.id}/release_dates?api_key=${API_KEY}`);
       const certificationData = await certificationResponse.json();
       const ageLabel = getAgeRating(certificationData.results);
+
+      // Crea un objeto de imagen para verificar su tamaño antes de aplicarla como fondo
       const img = new Image();
       img.src = `https://image.tmdb.org/t/p/original${movie.backdrop_path}`;
+
+      // Ajusta el tamaño del fondo dependiendo de la relación de aspecto de la imagen
       img.onload = () => {
         heroSection.style.backgroundSize = img.width / img.height > 2 ? "contain" : "cover";
       };
+
+      // Establece la imagen de fondo y el contenido del Hero Section
       heroSection.style.backgroundImage = `url(${img.src})`;
       heroTitle.textContent = movie.title;
       heroDescription.textContent = movie.overview.substring(0, 200) + "...";
       ageRating.textContent = ageLabel;
     } catch (error) {
-      console.error("Error obteniendo película en tendencia:", error);
+      console.error("Error obteniendo película en tendencia:", error); // Manejo de errores en la petición
     }
   }
 
   /**
    * Obtiene y muestra películas en diferentes categorías.
+   * Utiliza las URLs almacenadas en `urls` para hacer llamadas a la API de TMDB.
    */
   function cargarPeliculas() {
     Object.keys(urls).forEach((categoria) => {
       fetch(urls[categoria])
-        .then((response) => response.json())
-        .then((data) => mostrarPeliculas(data.results, categoria))
-        .catch((error) => console.error(`Error al obtener ${categoria}:`, error));
+        .then((response) => response.json()) // Convierte la respuesta en JSON
+        .then((data) => mostrarPeliculas(data.results, categoria)) // Llama a la función para mostrar películas
+        .catch((error) => console.error(`Error al obtener ${categoria}:`, error)); // Manejo de errores en la petición
     });
   }
 
   /**
    * Muestra películas en una sección específica del dashboard.
+   * Crea dinámicamente tarjetas de películas y las inserta en el DOM.
+   * 
    * @param {Array<Object>} peliculas - Lista de películas obtenidas de la API.
    * @param {string} categoria - ID del contenedor donde se mostrarán las películas.
    */
   function mostrarPeliculas(peliculas, categoria) {
     const contenedor = document.getElementById(categoria);
-    contenedor.innerHTML = "";
+    contenedor.innerHTML = ""; // Limpia el contenido previo antes de insertar nuevas películas
 
     peliculas.forEach((pelicula) => {
+      // Crear la tarjeta de película
       const card = document.createElement("div");
       card.classList.add("card");
 
+      // Crear y configurar la imagen de la película
       const img = document.createElement("img");
       img.src = `https://image.tmdb.org/t/p/w500${pelicula.poster_path}`;
       img.classList.add("card-img-top");
 
+      // Contenedor del contenido de la tarjeta
       const cardBody = document.createElement("div");
       cardBody.classList.add("card-body");
 
+      // Agregar el título de la película
       const title = document.createElement("h6");
       title.classList.add("card-title");
       title.textContent = pelicula.title;
 
+      // Contenedor de géneros de la película
       const genresContainer = document.createElement("ul");
       genresContainer.classList.add("genres", "d-flex", "my-2");
 
+      // Agregar los géneros a la lista
       pelicula.genre_ids.forEach((genreId) => {
         if (generosMap[genreId]) {
           const genreItem = document.createElement("li");
@@ -215,9 +263,11 @@ document.addEventListener("DOMContentLoaded", async function () {
         }
       });
 
+      // Contenedor de los botones de interacción
       const iconsContainer = document.createElement("div");
       iconsContainer.classList.add("d-flex", "justify-content-between");
 
+      // Contenedor izquierdo (favoritos)
       const leftIcons = document.createElement("div");
 
       // Crear botón de favoritos
@@ -225,14 +275,14 @@ document.addEventListener("DOMContentLoaded", async function () {
       favButton.type = "button";
       favButton.classList.add("btn", "fav-btn");
       favButton.setAttribute("data-id", pelicula.id);
-      favButton.innerHTML = `<i class="bi bi-heart-fill"></i>`;
+      favButton.innerHTML = `<i class="bi bi-heart-fill"></i>`; // Ícono de favorito
       favButton.title = "Agregar a Favoritos";
 
       // Verificar si la película ya está en favoritos y actualizar el color del botón
       const favoritos = obtenerFavoritos();
       const estaEnFavoritos = favoritos.some((peli) => peli.id === pelicula.id);
-      favButton.classList.toggle("btn-danger", estaEnFavoritos);
-      favButton.classList.toggle("btn-outline-secondary", !estaEnFavoritos);
+      favButton.classList.toggle("btn-danger", estaEnFavoritos); // Si está en favoritos, se marca en rojo
+      favButton.classList.toggle("btn-outline-secondary", !estaEnFavoritos); // Si no está, mantiene el estilo original
 
       // Evento para agregar/quitar favoritos
       favButton.addEventListener("click", () => {
@@ -241,23 +291,25 @@ document.addEventListener("DOMContentLoaded", async function () {
           pelicula.title,
           pelicula.poster_path
         );
-        mostrarFavoritos(); // Refrescar la lista de favoritos
+        mostrarFavoritos(); // Refrescar la lista de favoritos después de la acción
       });
 
-      leftIcons.appendChild(favButton);
+      leftIcons.appendChild(favButton); // Agregar el botón de favoritos al contenedor izquierdo
 
+      // Contenedor derecho (más información)
       const rightIcons = document.createElement("div");
       const infoButton = document.createElement("button");
       infoButton.type = "button";
       infoButton.classList.add("btn", "btn-outline-secondary", "info-btn");
       infoButton.setAttribute("data-id", pelicula.id);
-      infoButton.innerHTML = `<i class="bi bi-arrow-down-circle-fill"></i>`;
+      infoButton.innerHTML = `<i class="bi bi-arrow-down-circle-fill"></i>`; // Ícono de más información
       infoButton.title = "Más información";
 
       rightIcons.appendChild(infoButton);
       iconsContainer.appendChild(leftIcons);
       iconsContainer.appendChild(rightIcons);
 
+      // Agregar elementos a la tarjeta de película
       cardBody.appendChild(title);
       cardBody.appendChild(genresContainer);
       cardBody.appendChild(iconsContainer);
@@ -266,7 +318,10 @@ document.addEventListener("DOMContentLoaded", async function () {
       contenedor.appendChild(card);
     });
 
-    // Agregar evento a los botones de "Más información"
+    /**
+     * Agregar evento a los botones de "Más información".
+     * Al hacer clic en uno de estos botones, se obtiene la información detallada de la película.
+     */
     document.querySelectorAll(".info-btn").forEach((btn) => {
       btn.addEventListener("click", async (e) => {
         const movieId = e.currentTarget.getAttribute("data-id");
@@ -277,6 +332,8 @@ document.addEventListener("DOMContentLoaded", async function () {
 
   /**
    * Obtiene y muestra la información detallada de una película en un modal.
+   * Hace una petición a la API de TMDB para obtener detalles de la película seleccionada.
+   *
    * @param {number} movieId - ID de la película a consultar.
    */
   async function mostrarInformacionPelicula(movieId) {
@@ -284,84 +341,96 @@ document.addEventListener("DOMContentLoaded", async function () {
     const API_BASE_URL = "https://api.themoviedb.org/3";
 
     try {
+      // Realiza la petición a la API para obtener detalles de la película
       const response = await fetch(
         `${API_BASE_URL}/movie/${movieId}?api_key=${API_KEY}&language=es-ES`
       );
-      const movie = await response.json();
+      const movie = await response.json(); // Convierte la respuesta en JSON
 
+      // Actualiza el título de la película en el modal
       document.getElementById("movieTitle").textContent = movie.title;
-      document.getElementById(
-        "movieImage"
-      ).src = `https://image.tmdb.org/t/p/original${
+
+      // Asigna la imagen de la película, si no tiene, usa una imagen por defecto
+      document.getElementById("movieImage").src = `https://image.tmdb.org/t/p/original${
         movie.backdrop_path || "/assets/img/default-movie.jpg"
       }`;
+
+      // Actualiza la descripción de la película
       document.getElementById("movieDescription").textContent = movie.overview;
-      document.getElementById("movieYear").textContent =
-        movie.release_date.split("-")[0];
+
+      // Extrae el año de la fecha de lanzamiento y lo muestra
+      document.getElementById("movieYear").textContent = movie.release_date.split("-")[0];
+
+      // Muestra los géneros de la película en formato "Acción, Drama, Aventura"
       document.getElementById("movieGenre").textContent = movie.genres
         .map((g) => g.name)
         .join(", ");
 
+      // Actualiza el estado del botón de favoritos en el modal
       actualizarBotonFavoritos(movieId, movie.title);
 
+      // Obtiene el modal de Bootstrap y lo muestra
       const movieModal = new bootstrap.Modal(
         document.getElementById("movieModal")
       );
       movieModal.show();
     } catch (error) {
-      console.error("Error obteniendo la información de la película:", error);
+      console.error("Error obteniendo la información de la película:", error); // Manejo de errores en la petición
     }
   }
 
   /**
    * Muestra sugerencias de búsqueda en el menú desplegable basado en los resultados de la API.
    * Si no hay resultados, limpia el contenedor y oculta la lista de sugerencias.
-   * 
+   *
    * @param {Array<Object>} movies - Lista de películas obtenidas de la búsqueda.
    */
   function displaySearchSuggestions(movies) {
     if (movies.length === 0) {
-      searchResults.innerHTML = "";
-      searchResults.classList.remove("active");
+      searchResults.innerHTML = ""; // Limpia resultados anteriores
+      searchResults.classList.remove("active"); // Oculta la lista de sugerencias
       return;
     }
-    searchResults.innerHTML = "";
+    searchResults.innerHTML = ""; // Limpia los resultados previos
     movies.slice(0, 5).forEach((movie) => {
       const div = document.createElement("div");
-      div.classList.add("search-item");
-      div.dataset.id = movie.id;
-      div.textContent = movie.title;
-      searchResults.appendChild(div);
+      div.classList.add("search-item"); // Agrega una clase CSS para estilos
+      div.dataset.id = movie.id; // Almacena el ID de la película en un atributo de datos
+      div.textContent = movie.title; // Asigna el título de la película
+      searchResults.appendChild(div); // Agrega la sugerencia al contenedor
     });
   }
 
   /**
    * Alterna la visibilidad del campo de búsqueda y ajusta la posición del menú de sugerencias.
+   * Cuando el usuario hace clic en el botón de búsqueda, se muestra u oculta el campo de búsqueda.
    */
   searchToggle.addEventListener("click", () => {
-    searchWrapper.classList.toggle("active");
+    searchWrapper.classList.toggle("active"); // Alterna la visibilidad del campo de búsqueda
+
     if (searchWrapper.classList.contains("active")) {
       setTimeout(() => {
-        searchInput.focus();
-        searchResults.style.width = `${searchInput.offsetWidth}px`;
-        searchResults.style.left = `${searchInput.offsetLeft}px`;
-      }, 300);
+        searchInput.focus(); // Enfoca automáticamente el input al abrirse
+        searchResults.style.width = `${searchInput.offsetWidth}px`; // Ajusta el ancho de la lista de sugerencias
+        searchResults.style.left = `${searchInput.offsetLeft}px`; // Alinea la lista con el input de búsqueda
+      }, 300); // Retardo para asegurar que el elemento está visible antes de calcular su tamaño
     }
   });
 
   /**
-  * Captura el evento de presionar "Enter" en el campo de búsqueda,
-  * ejecuta la búsqueda de películas y desplaza la vista a los resultados.
-  * 
-  * @param {KeyboardEvent} event - Evento del teclado.
-  */
+   * Captura el evento de presionar "Enter" en el campo de búsqueda,
+   * ejecuta la búsqueda de películas y desplaza la vista a los resultados.
+   * 
+   * @param {KeyboardEvent} event - Evento del teclado.
+   */
   searchInput.addEventListener("keypress", async (event) => {
     if (event.key === "Enter") {
-      event.preventDefault();
-      const query = searchInput.value.trim();
+      event.preventDefault(); // Evita el envío automático del formulario
+      const query = searchInput.value.trim(); // Obtiene el valor del input sin espacios extra
       if (query) {
-        await fetchSearchResults(query);
+        await fetchSearchResults(query); // Realiza la búsqueda
 
+        // Desplazar la vista a la sección de resultados con una pequeña demora
         setTimeout(() => {
           document.getElementById("resultados-busqueda").scrollIntoView({
             behavior: "smooth",
@@ -372,15 +441,16 @@ document.addEventListener("DOMContentLoaded", async function () {
   });
 
   /**
-  * Realiza una búsqueda de películas en la API de TMDB y muestra los resultados.
-  * Si hay resultados, activa la sección de resultados y desplaza la vista hacia ella.
-  * 
-  * @async
-  * @param {string} query - Término de búsqueda ingresado por el usuario.
-  * @returns {Promise<void>} - No devuelve valor, pero actualiza la interfaz con los resultados de búsqueda.
-  */
+   * Realiza una búsqueda de películas en la API de TMDB y muestra los resultados.
+   * Si hay resultados, activa la sección de resultados y desplaza la vista hacia ella.
+   * 
+   * @async
+   * @param {string} query - Término de búsqueda ingresado por el usuario.
+   * @returns {Promise<void>} - No devuelve valor, pero actualiza la interfaz con los resultados de búsqueda.
+   */
   async function fetchSearchResults(query) {
     try {
+      // Llamada a la API de TMDB para obtener películas que coincidan con la búsqueda
       const response = await fetch(
         `${API_BASE_URL}/search/movie?api_key=${API_KEY}&language=es-ES&query=${query}`
       );
@@ -388,9 +458,9 @@ document.addEventListener("DOMContentLoaded", async function () {
 
       if (data.results.length > 0) {
         document.querySelector(".resultados-container").style.display = "block"; // Muestra la sección
-        displaySearchResults(data.results);
+        displaySearchResults(data.results); // Llama a la función para mostrar resultados
 
-        // Desplazar a la sección de resultados
+        // Desplazar a la sección de resultados con una pequeña demora
         setTimeout(() => {
           document.getElementById("resultados-busqueda").scrollIntoView({
             behavior: "smooth",
@@ -398,7 +468,7 @@ document.addEventListener("DOMContentLoaded", async function () {
         }, 300);
       }
     } catch (error) {
-      console.error("Error en la búsqueda:", error);
+      console.error("Error en la búsqueda:", error); // Manejo de errores
     }
   }
 
@@ -418,21 +488,25 @@ document.addEventListener("DOMContentLoaded", async function () {
     }
 
     movies.forEach((movie) => {
+      // Crear la tarjeta de la película
       const card = document.createElement("div");
       card.classList.add("card", "position-relative");
     
+      // Imagen de la película
       const img = document.createElement("img");
       img.src = `https://image.tmdb.org/t/p/w500${movie.poster_path}`;
       img.classList.add("card-img-top");
     
+      // Contenedor del contenido de la tarjeta
       const cardBody = document.createElement("div");
       cardBody.classList.add("card-body");
     
+      // Título de la película
       const title = document.createElement("h6");
       title.classList.add("card-title");
       title.textContent = movie.title;
     
-      // Contenedor para los botones alineados
+      // Contenedor para los botones
       const buttonsContainer = document.createElement("div");
       buttonsContainer.classList.add("d-flex", "justify-content-between", "w-100");
     
@@ -441,18 +515,18 @@ document.addEventListener("DOMContentLoaded", async function () {
       favButton.type = "button";
       favButton.classList.add("btn", "btn-outline-secondary", "fav-btn");
       favButton.setAttribute("data-id", movie.id);
-      favButton.innerHTML = `<i class="bi bi-heart-fill"></i>`;
+      favButton.innerHTML = `<i class="bi bi-heart-fill"></i>`; // Ícono de favorito
       favButton.title = "Agregar a Favoritos";
     
-      // Verificar si ya está en favoritos
+      // Verificar si la película ya está en favoritos y actualizar el color del botón
       const favoritos = obtenerFavoritos();
       const estaEnFavoritos = favoritos.some((peli) => peli.id === movie.id);
-      favButton.classList.toggle("btn-danger", estaEnFavoritos);
-      favButton.classList.toggle("btn-outline-secondary", !estaEnFavoritos);
+      favButton.classList.toggle("btn-danger", estaEnFavoritos); // Si está en favoritos, se marca en rojo
+      favButton.classList.toggle("btn-outline-secondary", !estaEnFavoritos); // Si no está, mantiene el estilo original
     
       // Evento para agregar/quitar favoritos
       favButton.addEventListener("click", () => {actualizarBotonFavoritos(movie.id, movie.title, movie.poster_path);
-        mostrarFavoritos();
+        mostrarFavoritos(); // Refrescar la lista de favoritos después de la acción
       });
     
       // Botón "Más Información"
@@ -460,7 +534,7 @@ document.addEventListener("DOMContentLoaded", async function () {
       infoButton.type = "button";
       infoButton.classList.add("btn", "btn-outline-secondary", "info-btn");
       infoButton.setAttribute("data-id", movie.id);
-      infoButton.innerHTML = `<i class="bi bi-arrow-down-circle-fill"></i>`;
+      infoButton.innerHTML = `<i class="bi bi-arrow-down-circle-fill"></i>`; // Ícono de más información
       infoButton.title = "Más información";
     
       // Evento para abrir el modal con la información de la película
@@ -468,7 +542,7 @@ document.addEventListener("DOMContentLoaded", async function () {
         await mostrarInformacionPelicula(movie.id);
       });
     
-      // Agregar botones al contenedor alineado
+      // Agregar botones al contenedor
       buttonsContainer.appendChild(favButton);
       buttonsContainer.appendChild(infoButton);
     
@@ -478,20 +552,26 @@ document.addEventListener("DOMContentLoaded", async function () {
       card.appendChild(img);
       card.appendChild(cardBody);
     
+      // Agregar la tarjeta de película al contenedor de resultados
       searchResultsContainer.appendChild(card);
     });
     
   }
 
   /**
-  * Maneja el clic en los resultados de búsqueda y redirige a la página de detalles de la película seleccionada.
-  * 
-  * @event click
-  * @param {MouseEvent} e - Evento de clic en un elemento de la lista de resultados de búsqueda.
-  */
+   * Maneja el clic en los resultados de búsqueda y redirige a la página de detalles de la película seleccionada.
+   * 
+   * @event click
+   * @param {MouseEvent} e - Evento de clic en un elemento de la lista de resultados de búsqueda.
+   */
   searchResults.addEventListener("click", (e) => {
+    // Verifica si el clic fue en un elemento de la lista de resultados
     if (e.target.classList.contains("search-item")) {
+
+      // Redirige a la página de detalles de la película con su ID como parámetro
       window.location.href = `movie.html?id=${e.target.dataset.id}`;
+
+      // Oculta y limpia la lista de sugerencias de búsqueda
       searchResults.classList.remove("active");
       searchResults.innerHTML = "";
     }
@@ -505,8 +585,11 @@ document.addEventListener("DOMContentLoaded", async function () {
   */
   document.addEventListener("keydown", (e) => {
     if (e.key === "Escape") {
+      // Oculta y limpia la lista de sugerencias de búsqueda
       searchResults.classList.remove("active");
       searchResults.innerHTML = "";
+
+      // Cierra el campo de búsqueda si estaba abierto
       searchWrapper.classList.remove("active");
     }
   });
@@ -516,7 +599,7 @@ document.addEventListener("DOMContentLoaded", async function () {
    */
   if (navbarToggler && navbar) {
     navbarToggler.addEventListener("click", () => {
-      navbar.classList.toggle("menu-open");
+      navbar.classList.toggle("menu-open"); // Abre o cierra el menú
     });
   }
 
@@ -538,8 +621,8 @@ document.addEventListener("DOMContentLoaded", async function () {
         !searchWrapper.contains(event.target) &&
         !searchToggle.contains(event.target)
       ) {
-        searchWrapper.classList.remove("active");
-        searchInput.value = ""; // limpia la barra de búsqueda
+        searchWrapper.classList.remove("active"); // Oculta la barra de búsqueda
+        searchInput.value = ""; // Limpia el contenido del campo de búsqueda
       }
     });
   }
@@ -554,6 +637,7 @@ document.addEventListener("DOMContentLoaded", async function () {
     const navbar = document.getElementById("navbarContent");
     const toggler = document.querySelector(".navbar-toggler");
 
+    // Verifica si el menú de navegación está abierto y si el clic fue fuera del navbar y del botón de toggler
     if (
       navbar.classList.contains("show") && // Verifica si el navbar está abierto
       !navbar.contains(event.target) && // Verifica si el clic fue fuera del navbar
@@ -568,8 +652,8 @@ document.addEventListener("DOMContentLoaded", async function () {
    */
   document.querySelectorAll(".info-btn").forEach((btn) => {
     btn.addEventListener("click", async (e) => {
-      const movieId = e.currentTarget.getAttribute("data-id");
-      await mostrarInformacionPelicula(movieId);
+      const movieId = e.currentTarget.getAttribute("data-id"); // Obtiene el ID de la película
+      await mostrarInformacionPelicula(movieId); // Muestra la información de la película en el modal
     });
   });
 
@@ -578,7 +662,10 @@ document.addEventListener("DOMContentLoaded", async function () {
   cargarPeliculas();
 });
 
-// FUNCIONES QUE NO DEPENDEN DEL DOM (Pueden ejecutarse en cualquier momento)
+// ===============================
+// FUNCIONES QUE NO DEPENDEN DEL DOM
+// (Pueden ejecutarse en cualquier momento sin necesidad de que el DOM esté cargado)
+// ===============================
 
 /**
  * Obtiene el usuario actualmente autenticado desde localStorage.
@@ -596,7 +683,7 @@ function obtenerUsuarioActual() {
  */
 function obtenerFavoritos() {
   const usuario = obtenerUsuarioActual();
-  if (!usuario) return [];
+  if (!usuario) return []; // Si no hay usuario autenticado, retorna una lista vacía.
   return (
     JSON.parse(localStorage.getItem(`favoritos_${usuario.username}`)) || []
   );
@@ -609,7 +696,9 @@ function obtenerFavoritos() {
  */
 function guardarFavoritos(favoritos) {
   const usuario = obtenerUsuarioActual();
-  if (!usuario) return;
+  if (!usuario) return; // Si no hay usuario autenticado, no guarda nada.
+
+  // Almacena la lista de favoritos en localStorage bajo la clave específica del usuario.
   localStorage.setItem(
     `favoritos_${usuario.username}`,
     JSON.stringify(favoritos)
@@ -625,25 +714,28 @@ function guardarFavoritos(favoritos) {
  */
 function actualizarBotonFavoritos(movieId, movieTitle, moviePoster) {
   const usuario = obtenerUsuarioActual();
-  if (!usuario) return;
+  if (!usuario) return; // Si no hay usuario autenticado, no realiza cambios.
 
-  let favoritos = obtenerFavoritos();
-  const existe = favoritos.some((peli) => peli.id === movieId);
+  let favoritos = obtenerFavoritos(); // Obtiene la lista actual de favoritos.
+  const existe = favoritos.some((peli) => peli.id === movieId); // Verifica si la película ya está en favoritos.
 
   if (existe) {
+    // Si la película ya está en favoritos, la elimina.
     favoritos = favoritos.filter((peli) => peli.id !== movieId);
   } else {
+    // Si la película no está en favoritos, la agrega.
     favoritos.push({ id: movieId, title: movieTitle, poster: moviePoster });
   }
 
-  guardarFavoritos(favoritos);
+  guardarFavoritos(favoritos); // Guarda la lista actualizada en localStorage.
 
-  // ACTUALIZAR COLOR DEL BOTÓN EN TODAS LAS TARJETAS
-  document
-    .querySelectorAll(`.fav-btn[data-id='${movieId}']`)
-    .forEach((button) => {
-      button.classList.toggle("btn-danger", !existe);
-      button.classList.toggle("btn-outline-secondary", existe);
+  /**
+   * Actualiza el color del botón de favoritos en todas las tarjetas de películas
+   * para reflejar el estado actualizado (agregado o eliminado de favoritos).
+   */
+  document .querySelectorAll(`.fav-btn[data-id='${movieId}']`) .forEach((button) => {
+      button.classList.toggle("btn-danger", !existe); // Si la película se agregó, cambia a color rojo.
+      button.classList.toggle("btn-outline-secondary", existe); // Si se eliminó, regresa al color original.
     });
 }
 

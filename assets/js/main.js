@@ -1,6 +1,6 @@
 // Clave de API y URLs base de The Movie Database (TMDB)
 const API_KEY = "7154c887e726b37b3d012f91ada2bf12";
-const BASE_URL = "https://api.themoviedb.org/3";
+const BASE_URL = "https://api.themoviedb.org/3"; // Peticiones a la API
 const TRENDING_URL = `${BASE_URL}/trending/movie/week?api_key=${API_KEY}&language=es-ES`;
 const IMAGE_BASE_URL = "https://image.tmdb.org/t/p/w500";
 
@@ -9,8 +9,8 @@ const IMAGE_BASE_URL = "https://image.tmdb.org/t/p/w500";
  */
 async function fetchTrendingMovies() {
   try {
-    const response = await fetch(TRENDING_URL);
-    const data = await response.json();
+    const response = await fetch(TRENDING_URL); // Usa fetch(TRENDING_URL) para hacer la petición HTTP a la API.
+    const data = await response.json(); // Convierte la respuesta en un formato JSON
     const movies = data.results.slice(0, 10); // Obtiene solo las 10 primeras películas
     displayTrendingMovies(movies);
   } catch (error) {
@@ -23,7 +23,7 @@ async function fetchTrendingMovies() {
  * @param {Array} movies - Lista de películas obtenidas de la API
  */
 function displayTrendingMovies(movies) {
-  const carouselContainer = document.getElementById("carousel-container");
+  const carouselContainer = document.getElementById("carousel-container"); // Contenedor del carrusel donde se mostrará las películas
   carouselContainer.innerHTML = ""; // Limpia el contenido previo
 
   for (let i = 0; i < movies.length; i += 5) {
@@ -33,8 +33,9 @@ function displayTrendingMovies(movies) {
           <img src="${IMAGE_BASE_URL}${movie.poster_path}" class="trend-img" alt="${movie.title}">
           <span class="trend-number">${i + index + 1}</span>
       </div>
-    `).join('');
+    `).join(''); // Unimos todas las películas en un solo string HTML
 
+    //Insertamos el grupo de películas dentro del carrusel
     carouselContainer.innerHTML += `
       <div class="carousel-item ${activeClass}">
           <div class="trend-group">${group}</div>
@@ -44,6 +45,7 @@ function displayTrendingMovies(movies) {
 
   // Agrega eventos de clic a cada película para abrir el modal
   document.querySelectorAll(".trend-item").forEach((item) => {
+    // Extraemos la información de la película almacenada en "data-movie"
     item.addEventListener("click", function () {
       const movie = JSON.parse(this.getAttribute("data-movie"));
       openMovieModal(movie);
@@ -57,7 +59,7 @@ function displayTrendingMovies(movies) {
  */
 function openMovieModal(movie) {
   document.getElementById('movieTitle').innerText = movie.title;
-  document.getElementById('movieImage').src = `https://image.tmdb.org/t/p/original${movie.backdrop_path || '/assets/img/default-movie.jpg'}`;
+  document.getElementById('movieImage').src = `https://image.tmdb.org/t/p/original${movie.backdrop_path || '../img/default-movie.jpg'}`;
   document.getElementById('movieYear').innerText = movie.release_date ? movie.release_date.split('-')[0] : 'Desconocido';
   document.getElementById('movieGenres').innerText = getGenreNames(movie.genre_ids);
   document.getElementById('movieOverview').innerText = truncateText(movie.overview, 150);

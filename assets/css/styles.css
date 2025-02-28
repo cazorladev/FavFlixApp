@@ -20,21 +20,23 @@ body {
   text-align: center;
 }
 
-/* ==========================
-   NAVBAR (Barra de navegación)
-   ========================== */
+/* ========================== */
+/*    ESTILOS DE LA NAVBAR    */
+/* ========================== */
+/* Estilos de la barra de navegación */
 .navbar {
-  position: absolute;
-  width: 100%;
-  top: 0;
+  position: absolute; /* Fija la barra en la parte superior de la página */
+  width: 100%; /* Ocupa todo el ancho */
+  /* top: 0; */
   background: rgba(0, 0, 0, 0.7);
   padding: 15px 0;
   transition: background 0.3s ease-in-out;
   z-index: 1000;
 }
 
+/* Estilos del logo */
 .navbar-brand img {
-  height: 60px; /* Logo más grande */
+  height: 60px; /* tamaño del logo */
   transition: transform 0.3s;
 }
 
@@ -45,6 +47,8 @@ body {
 /* ==========================
    BOTONES GENERALES
    ========================== */
+
+/* Estilos del botón de inicio de sesión */
 .btn-danger {
   background-color: var(--netflix-red);
   border-radius: 5px;
@@ -61,15 +65,16 @@ body {
    ========================== */
 .hero {
   background-image: url("/assets/img/favflix-background.jpg");
-  background-size: cover;
+  background-size: cover; /* La imagen cubre toda la pantalla */
   background-position: center;
-  height: 100vh;
+  height: 100vh; /* Altura del 100% de la pantalla */
   display: flex;
   align-items: center;
   justify-content: center;
   position: relative;
 }
 
+/* Efecto de degradado oscuro sobre la imagen de fondo */
 .hero::before {
   content: "";
   position: absolute;
@@ -77,26 +82,29 @@ body {
   height: 100%;
   background: linear-gradient(
     to bottom,
-    rgba(0, 0, 0, 0.9) 10%,
+    rgba(0, 0, 0, 0.9) 10%, 
     rgba(0, 0, 0, 0.5) 50%,
     rgba(0, 0, 0, 0.9) 90%
   );
   z-index: 0;
 }
 
+/* Contenedor de texto dentro de la sección Hero */
 .hero .container {
   /* position: relative; */
   z-index: 1;
 }
 
+/* Estilos del título principal */
 .hero h1 {
-  font-size: clamp(2rem, 5vw, 3rem);
+  font-size: clamp(2rem, 5vw, 3rem); /* Ajuste dinámico del tamaño del texto */
   font-weight: bold;
-  text-shadow: 2px 2px 15px rgba(0, 0, 0, 0.8);
+  text-shadow: 2px 2px 15px rgba(0, 0, 0, 0.8); /* Sombra para mejorar la visibilidad */
 }
 
+/* Botón de "Registrar Ahora" */
 .hero .btn-danger {
-  padding: 15px 35px;
+  padding: 15px 35px; /* Tamaño del botón */
   font-size: 1.5rem;
   font-weight: bold;
   box-shadow: 0px 0px 15px rgba(229, 9, 20, 0.7);
@@ -108,15 +116,17 @@ body {
   box-shadow: 0px 0px 25px rgba(229, 9, 20, 1);
 }
 
-/* ==========================
-   CARRUSEL DE TENDENCIAS
-   ========================== */
+/* ========================== */
+/*  SECCIÓN DE TENDENCIAS (TRENDING) */
+/* ========================== */
+/* Contenedor general de la sección de tendencias */
 .trending {
   text-align: center;
   padding-left: 0;
   background: linear-gradient(to top, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0));
 }
 
+/* Contenedor de películas dentro del carrusel */
 .trend-group {
   display: flex;
   gap: 35px;
@@ -129,10 +139,12 @@ body {
   margin: 0 auto;
 }
 
+/* Ocultar la barra de desplazamiento */
 .trend-group::-webkit-scrollbar {
   display: none;
 }
 
+/* Cada película en la lista de tendencias */
 .trend-item {
   flex: 0 0 auto;
   position: relative;
@@ -142,6 +154,7 @@ body {
   transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
 }
 
+/* Estilos de las imágenes de las películas */
 .trend-item img.trend-img {
   width: 100%;
   height: 100%;
@@ -156,25 +169,31 @@ body {
   box-shadow: 0px 3px 3px rgba(255, 255, 255, 0.2);
 }
 
+/* Número de ranking en las películas */
 .trend-number {
   position: absolute;
-  left: -20px;
-  bottom: -15px;
-  font-size: clamp(3rem, 5vw, 5.5rem);
+  left: -20px; /* Lo desplaza a la izquierda */
+  bottom: -15px; /* Lo mueve hacia abajo */
+  font-size: clamp(3rem, 5vw, 5.5rem); /* Ajusta dinámicamente el tamaño del texto */
   font-weight: bold;
   color: black;
-  -webkit-text-stroke: 1px white;
+  -webkit-text-stroke: 1px white; /* Borde blanco alrededor del texto */
   text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.7);
 }
 
+/* ========================== */
+/*    CARRUSEL DE PELÍCULAS   */
+/* ========================== */
+/* Configuración de las imágenes dentro del carrusel */
 .carousel-inner img {
-  max-height: 400px;
-  object-fit: cover;
+  max-height: 400px; /* Limita la altura máxima de las imágenes */
+  object-fit: cover; /* Ajusta la imagen para que cubra el contenedor sin deformarse */
 }
 
+/* Estilos para los botones de navegación del carrusel */
 .carousel-control-prev,
 .carousel-control-next {
-  width: 60px;
+  width: 60px; /* Tamaño de los botones */
   height: 60px;
   background: rgba(0, 0, 0, 0.7);
   border-radius: 50%;
@@ -184,86 +203,94 @@ body {
   justify-content: center;
 }
 
+/* Cambio de color y tamaño al pasar el mouse sobre los botones del carrusel */
 .carousel-control-prev:hover,
 .carousel-control-next:hover {
-  background: var(--netflix-red); /* Rojo de Netflix */
+  background: var(--netflix-red);
   transform: scale(1.1);
 }
 
+/* Personalización de los íconos de las flechas del carrusel */
 .carousel-control-prev-icon,
 .carousel-control-next-icon {
-  width: 30px;
+  width: 30px; /* Ajusta el tamaño de las flechas */
   height: 30px;
-  background-size: contain;
+  background-size: contain; /* Asegura que el icono no se deforme */
 }
 
-/* ==========================
-   CARRUSEL DE FEATURE
-   ========================== */
+/* ========================== */
+/* CARRUSEL DE CARACTERÍSTICAS (FEATURES) */
+/* ========================== */
+/* Tarjetas de características con efecto de sombra y movimiento */
 .feature-card {
   transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
 }
 
 .feature-card:hover {
-  transform: translateY(-10px);
+  transform: translateY(-10px); /* Mueve la tarjeta hacia arriba */
   box-shadow: 0px 10px 30px rgba(255, 255, 255, 0.2);
 }
 
+/* Iconos dentro de las tarjetas de características */
 .feature-icon {
   font-size: 2.5rem;
   transition: transform 0.3s ease-in-out;
 }
 
+/* Títulos de las secciones de "Tendencias" y "Características" */
 .trending h2,
 .features h2 {
   font-size: 2.2rem;
   font-weight: bold;
   text-align: center;
-  color: white !important; /* Ahora es blanco */
+  color: white;
 }
 
-/* ==========================
-   MODAL DE PELÍCULAS
-   ========================== */
+/* ========================== */
+/* MODAL DE DETALLES DE PELÍCULA */
+/* ========================== */
 .modal-dialog {
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 100vh;
-  max-width: 900px;
+  min-height: 100vh; /* Mantiene el modal centrado verticalmente */
+  max-width: 900px; /* Establece un ancho máximo */
   margin: auto;
 }
 
+/* Estilos del contenido del modal */
 .modal-content {
   border-radius: 12px;
-  overflow: hidden;
+  overflow: hidden; /* Evita que el contenido sobresalga */
   background-color: #181818;
   color: white;
   box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.6);
 }
 
-/* Imagen del modal */
+/* Contenedor de la imagen dentro del modal */
 .modal-banner {
   width: 100%;
-  height: 300px;
+  height: 300px; /* Altura fija */
   display: flex;
   align-items: center;
   justify-content: center;
   overflow: hidden;
 }
 
+/* Ajustes de tamaño y posición de la imagen */
 .modal-img {
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
 
-/* Información de la película */
+/* Contenedor de la información de la película */
 .modal-info {
   padding: 20px;
   text-align: center;
 }
 
+/* Título de la película dentro del modal */
 .movie-title {
   font-size: 1.8rem;
   font-weight: bold;
@@ -276,6 +303,7 @@ body {
   margin-bottom: 15px;
 }
 
+/* Descripción de la película */
 .movie-overview {
   font-size: 1rem;
   line-height: 1.5;
@@ -283,10 +311,13 @@ body {
   margin-bottom: 20px;
 }
 
+/* ========================== */
+/* BOTÓN "COMENZAR YA" DENTRO DEL MODAL */
+/* ========================== */
 .btn-netflix {
   background-color: #e50914;
   color: white;
-  padding: 12px 20px;
+  padding: 12px 20px; /* Espaciado interno */
   font-size: 1.2rem;
   font-weight: bold;
   border-radius: 5px;
@@ -359,9 +390,9 @@ footer a:hover {
   box-shadow: 0px 0px 15px rgba(229, 9, 20, 0.5);
 }
 
-/* ==========================
-   RESPONSIVE DESIGN (Adaptación a móviles)
-   ========================== */
+/* ========================== */
+/*    RESPONSIVE DESIGN       */
+/* ========================== */
 @media (max-width: 768px) {
   .hero {
     height: 100vh;

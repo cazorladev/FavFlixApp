@@ -1,3 +1,7 @@
+/* ========================= */
+/* VARIABLES DE COLOR Y DISEÑO */
+/* ========================= */
+/* Definimos colores principales y efectos de transición */
 :root {
   --netflix-red: #e50914;
   --netflix-black: #141414;
@@ -7,44 +11,53 @@
   --transition-speed: 0.3s;
 }
 
-/* General Styles */
+/* ========================= */
+/* ESTILOS GENERALES */
+/* ========================= */
+/* Configuración global del cuerpo de la página */
 body {
-  background-color: var(--netflix-black);
-  color: var(--netflix-white);
-  font-family: "Helvetica Neue", Arial, sans-serif;
-  animation: fadeIn 0.5s ease-in-out;
+  background-color: var(--netflix-black); /* Fondo oscuro */
+  color: var(--netflix-white); /* Texto en blanco */
+  font-family: "Poppins", sans-serif; /* Fuente principal */
+  animation: fadeIn 0.5s ease-in-out; /* Animación al cargar la página */
 }
 
+/* Animación de entrada */
 @keyframes fadeIn {
   from {
-    opacity: 0;
+    opacity: 0; /* Comienza invisible */
   }
   to {
     opacity: 1;
   }
 }
 
-/* Navigation Styles */
+/* ========================= */
+/* ESTILOS DE LA NAVEGACIÓN */
+/* ========================= */
+/* Barra de navegación con efecto de degradado */
 #mainNav {
   background: linear-gradient(180deg, rgba(0, 0, 0, 0.7) 0%, transparent 100%);
-  /* transition: background-color var(--transition-speed); */
   transition: background-color 0.5s ease-in-out;
-  padding: 0.5rem 0;
+  padding: 0.5rem 0; /* Ajusta el espaciado */
 }
 
+/* Cuando el usuario hace scroll, cambia el color de fondo */
 #mainNav.scrolled {
   background-color: var(--netflix-black);
 }
 
+/* Logo de la barra de navegación */
 .logo-img {
-  height: 40px;
-  width: auto;
+  height: 40px; /* Ajusta el tamaño */
+  width: auto; /* Mantiene la proporción */
 }
 
+/* Estilos de los enlaces del menú */
 #mainNav .navbar-nav .nav-link {
   color: var(--netflix-white);
   font-size: 0.9rem;
-  padding: 0.5rem 1rem;
+  padding: 0.5rem 1rem; /* Espaciado */
   transition: color var(--transition-speed);
 }
 
@@ -52,13 +65,12 @@ body {
   color: var(--netflix-light-gray);
 }
 
-/* CAMBIO HOY */
+/* Botón de menú en dispositivos móviles */
 .navbar-toggler {
   position: relative;
   z-index: 1051;
   padding: 0.25rem 0.2rem;
 }
-/* ***** */
 
 .navbar-toggler:focus {
   border: none;
@@ -66,25 +78,29 @@ body {
   box-shadow: none;
 }
 
+/* Icono del botón de menú */
 .navbar-toggler-icon {
-  filter: invert(100%);
+  filter: invert(100%); /* invierte los colores - blanco */
 }
 
-/* Search Form and User Profile - Always Visible */
+/* ========================= */
+/* FORMULARIO DE BÚSQUEDA */
+/* ========================= */
 .nav-end {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 0.5rem; /* Espaciado entre elementos */
 }
 
+/* Cuando el menú está abierto en móviles */
 .navbar.menu-open {
   background-color: var(--netflix-black);
 }
 
-/* Estilos para la lista de autocompletado */
+/* Contenedor de la lista de resultados de búsqueda */
 .search-results {
   position: absolute;
-  top: calc(100% + 5px); /* Baja 5px más para evitar solapamiento */
+  top: calc(100% + 5px); /* Baja 5px para evitar que se solape con el input */
   left: 0;
   width: 100%; /* Ocupa todo el ancho del input */
   background: var(--netflix-dark-gray);
@@ -92,9 +108,10 @@ body {
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
   max-height: 300px;
   overflow-y: auto;
-  z-index: 1000;
+  z-index: 1000; /* Se mantiene sobre otros elementos */
 }
 
+/* Contenedor del formulario de búsqueda */
 .search-wrapper {
   position: relative;
   display: flex;
@@ -106,6 +123,7 @@ body {
   display: block;
 }
 
+/* Estilos del botón de búsqueda */
 .search-toggle {
   background: transparent;
   border: none;
@@ -114,15 +132,16 @@ body {
   cursor: pointer;
 }
 
+/* Barra de búsqueda (oculta hasta activarse) */
 .search-input {
   position: absolute;
-  right: 100%;
+  right: 100%; /* Se posiciona a la derecha */
   background-color: var(--netflix-dark-gray);
   color: var(--netflix-white);
   padding: 0.5rem;
   min-width: 180px;
   max-width: 200px;
-  opacity: 0;
+  opacity: 0; /* Inicialmente oculta */
   border: none;
   transition: width 0.4s ease-in-out, opacity 0.4s ease-in-out;
 }
@@ -131,6 +150,17 @@ body {
   width: 100%; /* Hace que la lista ocupe todo el ancho de la barra */
 }
 
+/* Expande la barra de búsqueda cuando se activa */
+.search-wrapper.active .search-input {
+  width: 220px !important; /* Hace que la barra de búsqueda sea más grande al expandirse */
+  opacity: 1;
+  padding: 0.5rem 1rem;
+}
+
+/* ========================= */
+/* ELEMENTOS DE LA LISTA DE RESULTADOS */
+/* ========================= */
+/* Contenedor de cada resultado de búsqueda */
 .search-item {
   padding: 10px;
   cursor: pointer;
@@ -143,12 +173,11 @@ body {
   background: var(--netflix-red);
 }
 
-.search-wrapper.active .search-input {
-  width: 220px !important; /* Hace que la barra de búsqueda sea más grande al expandirse */
-  opacity: 1;
-  padding: 0.5rem 1rem;
-}
 
+/* ========================= */
+/* SECCIÓN DE RESULTADOS */
+/* ========================= */
+/* Contenedor de la sección de resultados */
 #search-results-section {
   padding: 20px;
   display: flex;
@@ -156,15 +185,20 @@ body {
   justify-content: center;
 }
 
+/* Contenedor de la cuadrícula de resultados */
 .search-results-grid {
   display: flex;
   flex-wrap: wrap;
-  gap: 15px;
+  gap: 15px; /* Espaciado entre elementos */
   justify-content: center;
   max-width: 1200px;
   margin: auto;
 }
 
+/* ========================= */
+/* TARJETAS DE RESULTADOS */
+/* ========================= */
+/* Estilos de la tarjeta de resultados */
 .search-card {
   width: 180px;
   background: var(--netflix-dark-gray);
@@ -174,11 +208,13 @@ body {
   transition: transform 0.3s ease-in-out;
 }
 
+/* Imagen dentro de la tarjeta */
 .search-card img {
   width: 100%;
   border-radius: 5px;
 }
 
+/* Título dentro de la tarjeta */
 .search-card h5 {
   font-size: 1rem;
   margin-top: 8px;
@@ -190,14 +226,10 @@ body {
   cursor: pointer;
 }
 
-/* #resultados-busqueda {
-  display: none;
-}
-
-.resultados-container {
-  display: none;
-} */
-
+/* ========================= */
+/* PERFIL DE USUARIO */
+/* ========================= */
+/* Botón de perfil */
 .profile-btn {
   display: flex;
   align-items: center;
@@ -209,6 +241,7 @@ body {
   padding: 0.5rem;
 }
 
+/* Icono de perfil con iniciales */
 .profile-initials {
   width: 40px;
   height: 40px;
@@ -224,7 +257,10 @@ body {
   /* padding: 0.5rem; */
 }
 
-/* Dropdown Menu */
+/* ========================= */
+/* MENÚ DESPLEGABLE */
+/* ========================= */
+/* Menú desplegable del perfil */
 .dropdown-menu {
   display: none;
   opacity: 0;
@@ -236,6 +272,7 @@ body {
   z-index: 1050;
 }
 
+/* Mostrar el menú al pasar el mouse */
 .profile-wrapper:hover .dropdown-menu {
   display: block;
   opacity: 1;
@@ -243,19 +280,23 @@ body {
   pointer-events: auto;
 }
 
-/* Hero Section Styles */
+/* ========================= */
+/* ESTILOS DE LA SECCIÓN HERO */
+/* ========================= */
+/* Sección hero con imagen de fondo */
 .hero-section {
   position: relative;
-  height: 100vh;
-  background-size: contain; /* Cambia de cover a contain en pantallas pequeñas */
-  background-position: center top; /* Centra mejor la imagen */
+  height: 100vh; /* Ocupa toda la pantalla */
+  background-size: contain;
+  background-position: center top;
   background-repeat: no-repeat;
   display: flex;
   align-items: center;
-  justify-content: flex-start;
-  overflow: hidden;
+  justify-content: flex-start; /* Alinea el contenido a la izquierda */
+  overflow: hidden; /* Evita que elementos se desborden */
 }
 
+/* Efecto de sombra en la imagen de fondo */
 .hero-section::before {
   content: "";
   position: absolute;
@@ -272,24 +313,27 @@ body {
   z-index: 1;
 }
 
+/* Contenedor del contenido en la sección hero */
 .hero-content {
   position: absolute;
-  z-index: 2;
+  z-index: 2; /* Asegura que el contenido esté sobre la imagen */
   padding-top: 30vh;
   bottom: 20%;
   width: 100%;
 }
 
+/* Capa de oscurecimiento para mejorar la legibilidad del texto */
 .hero-overlay {
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(0, 0, 0, 0.4);
+  background: rgba(0, 0, 0, 0.4); /* Capa negra semi-transparente */
   z-index: 1;
 }
 
+/* Degradado de desvanecimiento en la parte inferior */
 .hero-fade {
   position: absolute;
   bottom: 0;
@@ -300,35 +344,47 @@ body {
   z-index: 1;
 }
 
+/* ========================= */
+/* ESTILOS DEL TÍTULO Y DESCRIPCIÓN */
+/* ========================= */
+
+/* Estilo del título en la sección hero */
 .hero-title {
   font-size: 3rem;
   font-weight: bold;
   margin-bottom: 1rem;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-  max-width: 2000px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Agrega sombra al texto */
+  max-width: 2000px; /* Define un ancho máximo */
 }
 
+/* Estilo de la descripción */
 .hero-description {
   font-size: 1.1rem;
-  max-width: 2000px; /* Limita el ancho de la descripción a la mitad de la pantalla */
-  margin-bottom: 1.5rem;
+  max-width: 2000px; /* Evita que el texto ocupe toda la pantalla */
+  margin-bottom: 1.5rem; 
   text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
 }
 
+/* ========================= */
+/* ESTILOS DE BOTONES */
+/* ========================= */
+
+/* Contenedor de botones de acción */
 .hero-actions {
   display: flex;
   align-items: center;
-  gap: 1rem;
+  gap: 1rem; /* Espaciado entre botones */
 }
 
+/* Estilo de los botones de información */
 .info-btn {
   display: flex;
   align-items: center;
   gap: 0.5rem;
   padding: 0.5rem 1rem;
   font-size: 1.1rem;
-  background-color: rgba(109, 109, 109, 0.7);
-  border-radius: 5px; /* Agrega bordes redondeados */
+  background-color: rgba(109, 109, 109, 0.7); /* Fondo gris semi-transparente */
+  border-radius: 5px; /* Bordes redondeados */
 }
 
 /* Animación en el hover de los botones */
@@ -339,73 +395,94 @@ button,
 
 button:hover,
 .btn:hover {
-  transform: scale(1.05);
+  transform: scale(1.05); /* Aumenta ligeramente el tamaño al pasar el mouse */
 }
 
-/* Age Rating */
+/* ========================= */
+/* ESTILOS DE LA CLASIFICACIÓN POR EDAD */
+/* ========================= */
+
+/* Contenedor de la clasificación por edad */
 .age-rating {
   position: absolute;
   right: 0px;
   bottom: 0px;
-  background-color: rgba(0, 0, 0, 0.6); /* Fondo negro transparente */
+  background-color: rgba(0, 0, 0, 0.6); /* Fondo negro semi-transparente */
   color: white;
-  padding: 0.5rem 2rem 0.5rem 0.8rem;
+  padding: 0.5rem 2rem 0.5rem 0.8rem; /* Ajusta el espaciado interno */
   font-family: Arial, sans-serif;
   font-size: 1.1rem;
   font-weight: bold;
-  border-left: 3px solid var(--netflix-red);
+  border-left: 3px solid var(--netflix-red); /* Borde rojo a la izquierda */
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  min-width: 80px;
-  box-sizing: border-box;
+  min-width: 80px; /* Asegura un ancho mínimo */
+  box-sizing: border-box; /* Evita que el padding afecte el tamaño total */
 }
 
+/* ========================= */
+/* ESTILOS DE LAS PELÍCULAS */
+/* ========================= */
+/* Contenedor de las secciones de películas */
 .peliculas {
-  display: flex;
-  gap: 15px;
+  display: flex; /* Muestra las películas en fila */
+  gap: 15px; /* Espacio entre las tarjetas */
   padding: 10px;
-  /* overflow: visible !important; */
   position: relative; /* Asegura que los hijos puedan expandirse */
 }
 
+/* ========================= */
+/* TARJETAS DE PELÍCULAS */
+/* ========================= */
+
+/* Estilos generales de las tarjetas de películas */
 .peliculas .card {
-  width: 180px; /* Ajusta el ancho de la tarjeta */
-  height: 350px; /* Define una altura fija */
-  overflow: hidden; /* Evita desbordamientos */
+  width: 180px; /* Ancho fijo para todas las tarjetas */
+  height: 350px; /* Altura fija */
+  overflow: hidden; /* Evita que el contenido sobresalga */
   transition: transform 0.3s ease-in-out;
 }
 
 /* Ajustar la imagen dentro de la tarjeta */
 .peliculas .card img {
-  width: 100%;
+  width: 100%; /* Asegura que la imagen ocupe todo el ancho */
   height: 100%; /* Ajusta la altura de la imagen */
-  object-fit: cover; /* Evita deformaciones */
+  object-fit: cover; /* Evita que la imagen se deforme */
 }
 
-/* Mantener el efecto hover */
+/* Efecto al pasar el mouse sobre la tarjeta */
 .peliculas .card:hover {
   transform: scale(1.05);
 }
 
-/* Ajuste específico para los resultados de búsqueda */
+/* ========================= */
+/* ESTILOS PARA RESULTADOS DE BÚSQUEDA */
+/* ========================= */
+
+/* Mantiene el mismo tamaño que las tarjetas normales */
 #resultados-busqueda .card {
   width: 180px; /* Mantiene el mismo tamaño que las demás tarjetas */
   height: 350px;
 }
 
-/* Ajustar la imagen dentro de las tarjetas de resultados de búsqueda */
+/* Ajusta la imagen dentro de los resultados de búsqueda */
 #resultados-busqueda .card img {
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
 
+/* ========================= */
+/* PERSONALIZACIÓN DEL SCROLL EN LAS PELÍCULAS */
+/* ========================= */
 
+/* Personaliza la barra de desplazamiento en navegadores Webkit (Chrome, Safari) */
 .peliculas::-webkit-scrollbar {
-  height: 5px;
+  height: 5px; /* Grosor de la barra */
 }
 
+/* Color del scroll */
 .peliculas::-webkit-scrollbar-thumb {
   background: #888;
   border-radius: 4px;
@@ -415,24 +492,29 @@ button:hover,
   background: #555;
 }
 
-/* CAMBIO HOY */
+/* ========================= */
+/* AJUSTES GENERALES DE LAS TARJETAS */
+/* ========================= */
+
+/* Ajusta el tamaño y los efectos de hover */
 .card {
   position: relative;
-  min-width: 220px; /* Antes: 200px */
-  max-width: 260px; /* Antes: 250px */
+  min-width: 220px; /* Tamaño mínimo de la tarjeta */
+  max-width: 260px; /* Tamaño máximo */
   flex: 0 0 auto;
-  margin-right: 15px; /* Antes: 10px */
+  margin-right: 15px; /* Espaciado entre tarjetas */
   transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
   overflow: hidden;
-  border-radius: 12px; /* Antes: 10px */
+  border-radius: 12px; 
   background-color: #222;
   animation: fadeInUp 0.5s ease-in-out;
 }
 
+/* Animación de entrada suave */
 @keyframes fadeInUp {
   from {
     opacity: 0;
-    transform: translateY(20px);
+    transform: translateY(20px); /* Aparece desde abajo */
   }
   to {
     opacity: 1;
@@ -440,32 +522,30 @@ button:hover,
   }
 }
 
-/* Evita que todas se expandan, solo afecta a la tarjeta en hover */
-/* .card:hover {
-  transform: scale(1.2);
-  z-index: 15;
-  box-shadow: 0px 8px 16px rgba(255, 255, 255, 0.2);
-} */
-
 .card:hover {
   transform: scale(1.15);
   z-index: 10;
   box-shadow: 0px 10px 20px rgba(255, 255, 255, 0.2);
 }
 
-/* Ocultar el contenido adicional hasta que se haga hover */
+/* ========================= */
+/* CONTENIDO ADICIONAL EN LAS TARJETAS */
+/* ========================= */
+
+/* Contenedor de información oculta dentro de la tarjeta */
 .card-body {
   position: absolute;
   bottom: 0;
   left: 0;
   width: 100%;
-  background: rgba(0, 0, 0, 0.8);
+  background: rgba(0, 0, 0, 0.8); /* Fondo semi-transparente */
   color: white;
-  opacity: 0;
-  transform: translateY(30px);
+  opacity: 0; /* Inicialmente oculto */
+  transform: translateY(30px); /* Se mueve hacia abajo */
   transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
 }
 
+/* Botones dentro de la tarjeta */
 .card-body .btn {
   font-size: 1.2rem; /* Antes: más pequeño */
   padding: 8px 12px;
@@ -473,24 +553,28 @@ button:hover,
   transition: background 0.3s ease-in-out, transform 0.2s ease-in-out;
 }
 
-/* Aumentar tamaño de los íconos */
+/* Aumenta el tamaño de los íconos */
 .card-body .btn i {
   font-size: 1rem;
 }
 
-/* Efecto hover */
+/* Efecto al pasar el mouse sobre los botones */
 .card-body .btn:hover {
   transform: scale(1.1);
 }
 
-/* ***** */
 
-/* Solo se muestra cuando se hace hover sobre la tarjeta */
+/* Muestra el contenido adicional cuando se pasa el mouse sobre la tarjeta */
 .card:hover .card-body {
   opacity: 1;
   transform: translateY(0);
 }
 
+/* ========================= */
+/* ESTILOS DE LOS GÉNEROS */
+/* ========================= */
+
+/* Lista de géneros dentro de la tarjeta */
 .genres {
   list-style: none; /* Elimina los estilos de lista */
   color: aliceblue;
@@ -499,23 +583,27 @@ button:hover,
   padding: 0;
   gap: 5px; /* Espaciado entre los géneros */
 }
+
+/* Agrega un punto antes de cada género */
 .genres li::before {
-  content: "•"; /* Agrega el punto antes de cada género */
+  content: "•";
   margin-right: 5px;
   color: grey;
 }
 
+/* Elimina el punto del primer género */
 .genres li:first-child::before {
   content: ""; /* Elimina el punto del primer elemento */
 }
 
+/* Estilo de los botones secundarios */
 .btn-outline-secondary {
   border-radius: 30%;
 }
 
-
-
-/* ----- Estilos del Footer ----- */
+/* ========================= */
+/* ESTILOS DEL FOOTER */
+/* ========================= */
 footer {
   background: var(--netflix-black);
   color: #b3b3b3;
@@ -532,13 +620,14 @@ footer h5 {
   margin-bottom: 15px;
 }
 
-/* Estilos de los enlaces */
+/* Estilos de los enlaces del footer */
 footer a {
   color: #b3b3b3;
   text-decoration: none;
   transition: color 0.3s ease;
 }
 
+/* Cambio de color al pasar el mouse */
 footer a:hover {
   color: white;
 }
@@ -556,7 +645,6 @@ footer a:hover {
   color: white;
   font-size: 20px;
   transition: background 0.3s ease, transform 0.2s ease;
-  /* transition: transform 0.3s ease, box-shadow 0.3s ease; */
 }
 
 .social-icon:hover {
@@ -565,7 +653,9 @@ footer a:hover {
   box-shadow: 0px 0px 15px rgba(229, 9, 20, 0.5);
 }
 
-/* Responsive Styles */
+/* ========================= */
+/* ESTILOS RESPONSIVOS */
+/* ========================= */
 @media (max-width: 1200px) {
   .trend-item {
     min-width: 160px;
@@ -606,11 +696,6 @@ footer a:hover {
   .navbar-toggler {
     margin-left: auto;
   }
-
-  /* .nav-end {
-    position: static;
-    margin-top: 10px;
-  } */
 
   .hero-title {
     font-size: 2rem;
